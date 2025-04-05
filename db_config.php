@@ -1,7 +1,7 @@
 <?php
 return [
-    'host' => 'localhost',
-    'dbname' => 'paleomapa',
-    'user' => 'postgres',
-    'pass' => '1234pP'
+    'host' => 'gis4cloud.com',
+    'dbname' => 'grupo2_ptas2025',
+    'user' => 'grupo2_ptas2025',
+    'pass' => 'aguedacity'
 ];

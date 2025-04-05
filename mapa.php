@@ -57,4 +57,4 @@
 <div id="filters">
   <strong>Filtros:</strong><br>
 </div>
-<script src="./js/map.js"></script>
+<script src="./js/mapa.js"></script>

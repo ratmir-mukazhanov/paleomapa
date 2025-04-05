@@ -23,6 +23,8 @@
         <a href="#" class="map" data-url="mapa.php">Ver mapa</a>
     </div>
 
+    <a href="routing.html" class="routing">Ver Routing</a>
+
     <div id="main">
         <button id="openNav" onclick="openNav()">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">

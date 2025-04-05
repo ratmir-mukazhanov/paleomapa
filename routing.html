@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PaleoMapa - PTAS</title>
+  <!-- OpenLayers + Estilos -->
+  <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
+  <!-- Bootstrap + jQuery + Select -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Turf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"
+    integrity="sha512-Q7HOppxoH0L2M7hreVoFCtUZimR2YaY0fBewIYzkCgmNtgOOZ5IgMNYxHgfps0qrO1ef5m7L1FeHrhXlq1I9HA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Slider -->
+  <link rel="stylesheet" href="./js/node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css">
+  <script src="./js/node_modules/bootstrap-slider/js/bootstrap-slider.js"></script>
+  <!-- CSS e JS locais -->
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/ol-ext.css">
+  <script src="./js/ol-ext.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/map.js"></script>
+  <script src="./js/layers.js"></script>
+  <script src="./js/popup.js"></script>
+  <script src="./js/isochrone.js"></script>
+  <script src="./js/data.js"></script>
+  <script src="./js/events.js"></script>
+  <script src="./js/app.js"></script>
+</head>
+<body>
+  <!-- Mapa -->
+  <div id="mapa">
+    <!-- Seleção de camadas -->
+    <div id="toolbox">
+      <ul id="layerswitcher">
+        <li><label><input type="radio" name="layer" value="0" checked> Bing aéreo</label></li>
+        <li><label><input type="radio" name="layer" value="1"> OSM</label></li>
+      </ul>
+    </div>
+    <!-- Transporte -->
+    <div id="toolbox1" class="btn-toolbar">
+      <div id="meio_transporte" class="btn-group" data-toggle="buttons">
+        <label class="btn btn-default active">
+          <input type="radio" name="options" id="option1" value="ape" checked> <i class="fas fa-walking"></i> A pé
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="options" id="option2" value="bicicleta"> <i class="fas fa-bicycle"></i> Bicicleta
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="options" id="option3" value="carro"> <i class="fas fa-car"></i> Automóvel
+        </label>
+      </div>
+    </div>
+    <!-- Slider de tempo -->
+    <div id="container_slider">
+      <div id="sliderdiv">
+        <input id="sl1" type="text" data-slider-id="sl1Slider" data-slider-min="5" data-slider-max="60"
+          data-slider-step="5" data-slider-value="15">
+      </div>
+    </div>
+    <!-- Filtros do lado esquerdo (movido para dentro da div "mapa") -->
+    <div id="left-filters">
+      <div class="layer-filters">
+        <h4>Camadas</h4>
+        <ul>
+          <li><label><input type="checkbox" id="toggle-fossils" checked> <i class="fas fa-bone"></i> Fósseis</label></li>
+          <li><label><input type="checkbox" id="toggle-cafes" checked> <i class="fas fa-coffee"></i> Cafés</label></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Slider Init Script -->
+  <script>
+    $("#sl1").slider({
+      formatter: function (value) {
+        return value + ' min';
+      },
+      tooltip: 'always'
+    });
+  </script>
+</body>
+</html>

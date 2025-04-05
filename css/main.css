@@ -1,0 +1,358 @@
+/* Reset básico */
+html, body, #mapa {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  background-color: #f8f5f0; /* Tom mais suave de pergaminho */
+  color: #433831; /* Tom escuro para texto base */
+}
+
+/* Variáveis CSS para paleta de cores consistente */
+:root {
+  --primary-color: #5d4a38;      /* Marrom base mais escuro */
+  --primary-light: #8d7b69;      /* Marrom mais claro */
+  --primary-dark: #3a2e22;       /* Marrom ainda mais escuro */
+  --accent-color: #c2906d;       /* Tom terroso alaranjado para destaque */
+  --panel-bg: rgba(59, 45, 30, 0.85); /* Fundo de painéis */
+  --panel-light: rgba(93, 74, 56, 0.90); /* Fundo mais claro */
+  --text-light: #ece6da; /* Texto claro */
+  --highlight: #e8d2b4;  /* Destaque */
+  --border-radius: 10px; /* Bordas mais arredondadas */
+  --shadow: 0 6px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* Estilo comum para todos os painéis e toolboxes */
+#toolbox, #toolbox1, #container_slider, .layer-filters {
+  position: absolute;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  background: var(--panel-bg);
+  color: var(--text-light);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+#toolbox:hover,
+#toolbox1:hover,
+#container_slider:hover,
+.layer-filters:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Caixa de seleção de camadas */
+#toolbox {
+  top: 15px;
+  right: 100px;
+}
+
+#toolbox ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#toolbox ul li {
+  margin: 10px 0;
+}
+
+#toolbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#toolbox input[type="radio"] {
+  margin-right: 8px;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--text-light);
+  border-radius: 50%;
+  outline: none;
+  transition: var(--transition);
+}
+
+#toolbox input[type="radio"]:checked {
+  border: 5px solid var(--accent-color);
+  background: var(--text-light);
+}
+
+/* Botões de transporte */
+#toolbox1 {
+  top: 160px;
+  right: 60px;
+}
+
+#meio_transporte {
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+#meio_transporte .btn {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 10px 15px;
+  border: none;
+  color: var(--text-light);
+  background: var(--panel-light);
+  margin-bottom: 8px;
+  border-radius: 6px;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+#meio_transporte .btn i {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+#meio_transporte .btn.active,
+#meio_transporte .btn:hover,
+#meio_transporte .btn:focus {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-dark) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Slider de tempo */
+/* Restaurando layout de antes, porém com as cores novas */
+#container_slider {
+  top: 270px;
+  right: 70px;
+}
+
+/* container_slider já tem padding: 16px vindo do estilo comum, se preferir menos, ajuste aqui */
+#sliderdiv {
+  padding: 5px 0;
+}
+
+/* Deixa o slider horizontal sem ocupar 100% se quiser fixo, ou mantenha como antes */
+.slider.slider-horizontal {
+  width: 200px; /* Ajuste conforme desejar */
+}
+
+#sl1Slider .slider-selection {
+  background: var(--accent-color);
+}
+#sl1Slider .slider-handle {
+  background: var(--primary-dark);
+  border: 2px solid var(--accent-color);
+  cursor: pointer;
+}
+.slider-handle.round {
+  border-radius: 50%;
+}
+
+.tooltip-inner {
+  background-color: var(--primary-dark);
+  font-weight: bold;
+  padding: 5px 10px;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: var(--primary-dark);
+}
+
+/* Popup de OpenLayers */
+.ol-popup {
+  max-width: 340px;
+  min-width: 120px;
+  font-size: 15px;
+  color: var(--primary-dark);
+  background-color: #ffffff;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 15px;
+  animation: popFade 0.3s ease-out;
+}
+
+@keyframes popFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ol-popup img {
+  float: left;
+  margin: 0 15px 10px 0;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Filtros do lado esquerdo */
+#left-filters {
+  position: absolute;
+  top: 60px;
+  left: 15px;
+  z-index: 100;
+  width: 190px;
+}
+
+.layer-filters {
+  margin-top: 15px;
+}
+
+.layer-filters h4 {
+  margin: 0 0 15px 0;
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--highlight);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 8px;
+}
+
+.layer-filters ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 8px;
+}
+
+.layer-filters li {
+  margin: 12px 0;
+}
+
+.layer-filters label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.layer-filters input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--text-light);
+  border-radius: 4px;
+  margin-right: 10px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.layer-filters input[type="checkbox"]:checked {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.layer-filters input[type="checkbox"]:checked:after {
+  content: '✓';
+  position: absolute;
+  color: var(--primary-dark);
+  font-size: 14px;
+  top: -1px;
+  left: 3px;
+}
+
+.layer-filters i {
+  margin-right: 8px;
+  color: var(--highlight);
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Créditos */
+.credits {
+  z-index: 100;
+  color: var(--primary-dark);
+  font-style: italic;
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* Títulos e blocos */
+.title,
+.example-name {
+  font-family: 'StoneAge', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+/* Ajustando container da demonstração */
+.container {
+  margin: 0 auto;
+  max-width: 850px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Tipo de letra para toques paleontológicos */
+@font-face {
+  font-family: "StoneAge";
+  src: url("../font/StoneAge.ttf");
+}
+
+/* Controles OpenLayers mais elegantes */
+.ol-control {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.ol-control button {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.ol-control button:hover,
+.ol-control button:focus {
+  background-color: var(--accent-color);
+}
+
+.ol-zoom {
+  top: 15px;
+  left: 15px;
+}
+
+/* Animações suaves para os elementos interativos */
+button,
+input[type="radio"],
+input[type="checkbox"] {
+  transition: var(--transition);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  #toolbox {
+    top: 10px;
+    right: 10px;
+    padding: 12px;
+  }
+
+  #toolbox1 {
+    top: 120px;
+    right: 10px;
+  }
+
+  #container_slider {
+    top: 230px;
+    right: 10px;
+  }
+
+  #left-filters {
+    top: 40px;
+    left: 10px;
+    width: 160px;
+  }
+}
