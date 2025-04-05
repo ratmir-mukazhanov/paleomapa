@@ -91,6 +91,14 @@ body {
 	}
 }
 
+.sidebar-navigation ul li.active {
+	background-color: var(--active-sidebar-link-color);
+}
+
+.sidebar-navigation ul li.active i {
+	color: var(--active-link-color);
+}
+
 a {
     color: white;
     text-decoration: none;

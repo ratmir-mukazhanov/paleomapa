@@ -1,5 +1,3 @@
-document.getElementById("headerTitlePage").textContent = "Paleontology Map of Portugal";
-
 // Responsável pela criação e configuração inicial do mapa e view
 window.App = window.App || {};
 
