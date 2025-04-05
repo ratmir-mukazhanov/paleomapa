@@ -1,4 +1,3 @@
-<!--
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -7,15 +6,22 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
   <link rel="stylesheet" href="./css/style.css">
 </head>
+
+
+<?php 
+  require_once "header.php";
+  require_once "sidebar.php";
+?>
+
+
 <body>
   <div id="map"></div>
 
   <div id="popup" class="ol-popup">
     <div id="popup-content"></div>
-  </div> -->
+  </div>
 
   <!-- Панель выбора слоя -->
-  <!--
   <div id="layer-toggle">
   <label for="baselayer-select"><strong>Base Layer:</strong></label><br>
   <select id="baselayer-select">
@@ -24,37 +30,14 @@
     <option value="topo">Topográfico</option>
   </select>
 </div>
--->
 
   <!-- Панель фильтров -->
-  <!--
   <div id="filters">
     <strong>Filtros:</strong><br>
--->
     <!-- Здесь будут будущие фильтры -->
-  <!--
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
   <script src="./js/map.js"></script>
 </body>
 </html>
--->
-
-<!-- mapa.php -->
-<div id="map"></div>
-<div id="popup" class="ol-popup">
-    <div id="popup-content"></div>
-</div>
-<div id="layer-toggle">
-  <label for="baselayer-select"><strong>Base Layer:</strong></label><br>
-  <select id="baselayer-select">
-    <option value="standard">Padrão</option>
-    <option value="humanitarian">Humanitário</option>
-    <option value="topo">Topográfico</option>
-  </select>
-</div>
-<div id="filters">
-  <strong>Filtros:</strong><br>
-</div>
-<script src="./js/mapa.js"></script>

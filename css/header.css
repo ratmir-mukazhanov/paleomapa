@@ -1,0 +1,60 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: 'Lato', sans-serif;
+	line-height: 1;
+}
+
+body {
+	background-color: #F5F6F8;
+	/*overflow: hidden;*/
+}
+
+.headerUL {
+    position: sticky;
+    top:0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #313443;
+
+}
+  
+.headerList {
+    float: left;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5%;
+}
+
+#loginHeader {
+    float: right;
+    font-size: 24px;
+    color: white;
+}
+  
+.headerList a {
+    
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+.headerList a:hover {
+    background-color: #22252E;
+}
+
+svg {
+    display: inline-flex;
+    align-self: center;
+    height:1em;
+    width:1em;
+    top: .125em;
+    position: relative;
+  }
