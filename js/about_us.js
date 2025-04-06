@@ -1,1 +1,0 @@
-document.getElementById("headerTitlePage").textContent = "About Us";

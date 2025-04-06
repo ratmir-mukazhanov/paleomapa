@@ -1,5 +1,3 @@
-document.getElementById("headerTitlePage").textContent = "HomePage";
-
 var simpleRSSPlugin = (function() {
 	// get all the feed containers
 	var feedsNodes = document.querySelectorAll('[data-rss-feed]');

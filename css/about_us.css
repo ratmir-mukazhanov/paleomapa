@@ -1,0 +1,26 @@
+.main-content {
+    margin-top: 60px;  
+    margin-left: 80px;  
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.section-title {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 60px;
+    background-color: var(--accent-color);
+}

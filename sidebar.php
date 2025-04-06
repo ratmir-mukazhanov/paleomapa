@@ -3,6 +3,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <link rel="stylesheet" href="./css/sidebar.css">
+<link rel="stylesheet" href="./css/cores.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <nav class="sidebar-navigation">

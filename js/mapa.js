@@ -1,5 +1,3 @@
-document.getElementById("headerTitlePage").textContent = "Paleontology Map of Portugal";
-
 const layersMap = {
 standard: new ol.layer.Tile({
     title: 'OpenStreetMap Standard',

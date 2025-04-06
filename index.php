@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/cores.css">
     <title>Paleomapa - HomePage</title>
 </head>
 
@@ -14,9 +15,7 @@
 
 <body>
 
-    <h1>HomePage</h1>
-
-
+<div class="main-content">
     <div
         class="rssFeed"
         data-rss-feed="https://paleontologyworld.com/blog/feed" 
@@ -24,6 +23,7 @@
         data-rss-title-wrapper="h3" 
         data-rss-max="1">
     </div>
+</div>
 
 
 </body>

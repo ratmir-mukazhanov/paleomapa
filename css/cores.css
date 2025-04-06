@@ -1,0 +1,31 @@
+/* cores.css */
+/* Paleta de Cores Terrosas - Tema Paleontológico */
+
+:root {
+    /* Cores principais */
+    --primary-color: #5d4a38;           /* Marrom base escuro */
+    --primary-light: #8d7b69;           /* Marrom mais claro */
+    --primary-dark: #3a2e22;            /* Marrom ainda mais escuro */
+    --accent-color: #c2906d;            /* Destaque alaranjado */
+    --highlight: #e8d2b4;               /* Destaque claro */
+  
+    /* Fundos e Texto */
+    --panel-bg: rgba(59, 45, 30, 0.85);
+    --panel-light: rgba(93, 74, 56, 0.90);
+    --text-black: #000000;
+    --text-white: #ffffff;
+    --background-color: #F5F6F8;
+  
+    /* Sidebar específica */
+    --sidebar-background-color: var(--primary-dark);
+    --active-sidebar-link-color: var(--primary-color);
+    --hover-sidebar-link-color: var(--primary-light);
+    --active-link-color: var(--highlight);
+    --tooltip-background-color: var(--panel-light);
+  
+    /* Estilo geral */
+    --border-radius: 10px;
+    --shadow: 0 6px 12px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+  }
+  
