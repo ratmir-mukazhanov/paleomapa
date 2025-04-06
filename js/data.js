@@ -3,7 +3,7 @@ window.App = window.App || {};
 
 App.loadFossilsData = function() {
   $.ajax({
-    url: './scripts/fosseis_turf.php',
+    url: '../scripts/fosseis_turf.php',
     async: false,
     success: (data) => {
       App.state.fossils.source.clear();
@@ -37,7 +37,7 @@ App.updateFossilsWithinIsochrone = function() {
 
 App.loadCafesData = function() {
   $.ajax({
-    url: './scripts/cafes_turf.php',
+    url: '../scripts/cafes_turf.php',
     async: false,
     success: (data) => {
       App.state.cafes.source.clear();

@@ -21,7 +21,7 @@ topo: new ol.layer.Tile({
 };
 
 const vectorSource = new ol.source.Vector({
-url: 'data.php',
+url: '../scripts/data.php',
 format: new ol.format.GeoJSON()
 });
 

@@ -15,7 +15,7 @@ html, body, #mapa {
   padding: 16px;
   border-radius: var(--border-radius);
   background: var(--panel-bg);
-  color: var(--text-light);
+  color: var(--text-white);
   box-shadow: var(--shadow);
   transition: var(--transition);
   backdrop-filter: blur(5px);
@@ -59,7 +59,7 @@ html, body, #mapa {
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid var(--text-light);
+  border: 2px solid var(--text-white);
   border-radius: 50%;
   outline: none;
   transition: var(--transition);

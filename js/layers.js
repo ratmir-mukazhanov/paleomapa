@@ -18,7 +18,7 @@ App.setupFossilsLayer = function() {
   });
 
   App.state.fossils.layer = new ol.layer.Vector({
-    title: 'Instituições de ensino',
+    title: 'Fósseis',
     nome: 'fosseis_layer',
     source: App.state.fossils.source,
     style: App.createFossilStyles()
@@ -58,7 +58,7 @@ App.setupStartPointLayer = function() {
         anchor: [0.5, 300],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
-        src: './img/start.png',
+        src: '../img/start.png',
         scale: 0.15
       })
     }),
@@ -90,7 +90,7 @@ App.createFossilStyles = function() {
     image: new ol.style.Icon({
       anchor: [0.5, 1.0],  // Ajuste a posição conforme necessário
       scale: 0.05,          // Valor < 1 para diminuir
-      src: './img/fossil.png'
+      src: '../img/fossil.png'
     })
   });
 };
@@ -101,7 +101,7 @@ App.createCafeStyles = function() {
     image: new ol.style.Icon({
       anchor: [0.5, 1.0],   // Ajuste conforme desejar
       scale: 0.04,           // Ajuste conforme o tamanho que quer
-      src: './img/cafe.png' // Caminho do ícone
+      src: '../img/cafe.png' // Caminho do ícone
     })
   });
 };

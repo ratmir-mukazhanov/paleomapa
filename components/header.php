@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="./css/header.css">
-<link rel="stylesheet" href="./css/cores.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/cores.css">
 
 <ul class="headerUL">
     <li id="headerLogo" class="headerList">
-        <img src="./img/logoFossils.png" alt="Paleomapa Logo" class="header-logo">
+        <img src="../img/logoFossils.png" alt="Paleomapa Logo" class="header-logo">
         <span id="headerTitlePage">Paleomapa</span>
     </li>
     <li id="loginHeader" class="headerList">

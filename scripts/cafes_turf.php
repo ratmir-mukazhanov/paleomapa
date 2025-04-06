@@ -1,12 +1,10 @@
 <?php
 header('Content-Type: application/json');
-require_once 'db_connect.php';
+require_once '../db/db_connect.php';
 
 try {
     $db_connection = connect_db();
 
-    // Ajuste a query conforme o nome da coluna de geometria, se for "geom" ou "way"
-    // Se a geometria estiver em "geom" e for do tipo ponto, algo assim:
     $query = "
         SELECT jsonb_build_object(
             'type',       'FeatureCollection',

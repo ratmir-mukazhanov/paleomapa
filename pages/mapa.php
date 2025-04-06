@@ -5,15 +5,15 @@
   <title>Mapa com OpenLayers</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
   <div class="layout-wrapper">
-    <?php require_once "header.php"; ?>
+    <?php require_once "../components/header.php"; ?>
 
     <div class="layout-body">
-      <?php require_once "sidebar.php"; ?>
+      <?php require_once "../components/sidebar.php"; ?>
 
       <div class="main-content">
         <div id="map"></div>
@@ -42,6 +42,6 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
-<script src="./js/mapa.js"></script>
+<script src="../js/mapa.js"></script>
 
 </html>

@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-$config = require 'db_config.php';
+$config = require '../db/db_config.php';
 $dsn = "pgsql:host={$config['host']};dbname={$config['dbname']}";
 $pdo = new PDO($dsn, $config['user'], $config['pass']);
 

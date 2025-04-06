@@ -2,13 +2,13 @@
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
-<link rel="stylesheet" href="./css/sidebar.css">
-<link rel="stylesheet" href="./css/cores.css">
+<link rel="stylesheet" href="../css/sidebar.css">
+<link rel="stylesheet" href="../css/cores.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <nav class="sidebar-navigation">
 	<ul>
-		<a href="index.php">   
+		<a href="../pages/index.php">   
 			<li class="<?= ($currentPage === 'index.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -19,7 +19,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="mapa.php">   
+		<a href="../pages/mapa.php">   
 			<li class="<?= ($currentPage === 'mapa.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -30,7 +30,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="routing.html">
+		<a href="../pages/routing.html">
 			<li class="<?= ($currentPage === 'routing.html') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -41,7 +41,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="about_us.php">
+		<a href="../pages/about_us.php">
 			<li class="<?= ($currentPage === 'about_us.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -52,7 +52,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="contact_us.php">
+		<a href="../pages/contact_us.php">
 			<li class="<?= ($currentPage === 'contact_us.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -65,4 +65,4 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 	</ul>
 </nav>
 
-<script src="./js/sidebar.js"></script>
+<script src="../js/sidebar.js"></script>
