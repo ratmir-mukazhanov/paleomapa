@@ -24,3 +24,239 @@
     width: 60px;
     background-color: var(--accent-color);
 }
+
+.about-cards-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+}
+
+.about-card {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--highlight);
+    color: var(--primary-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.about-card h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.about-card h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+.about-card p {
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para cada card */
+
+/* Missão e Objetivos */
+.card-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.highlight-item i {
+    color: var(--accent-color);
+    margin-top: 3px;
+}
+
+/* História e Contexto */
+.timeline {
+    margin-top: 25px;
+    position: relative;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+    width: 2px;
+    background-color: var(--primary-light);
+}
+
+.timeline-item {
+    padding-left: 30px;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 6px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+}
+
+.timeline-content h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.timeline-content p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* A Equipa */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.team-member {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--highlight);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.team-member:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.member-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 3px solid var(--accent-color);
+}
+
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member h3 {
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.member-role {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+/* Fontes de Dados e Tecnologias */
+.tech-section {
+    margin-top: 20px;
+}
+
+.tech-section h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin: 20px 0 15px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.tech-section h3:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 3px;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(232, 210, 180, 0.3);
+    border-radius: var(--border-radius);
+}
+
+.tech-item i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    .about-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .about-card:first-child,
+    .about-card:last-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 767px) {
+    .team-grid, 
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-divider {
+        width: 95%;
+    }
+}

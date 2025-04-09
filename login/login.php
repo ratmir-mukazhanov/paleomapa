@@ -18,14 +18,11 @@ if (isset($_COOKIE['remembered_email'])) {
   <link rel="stylesheet" href="loginStyle.css">
 </head>
 
-<body>
-  <div style="display: flex; align-items:center;">
-    <div id="logo" style="margin: 2vh 2vw; cursor: pointer; display: flex; align-items:center;">
-      <img src="../img/logoFossils.png" alt="Paleomapa Logo" style="height: 7vh;">
-      <h2 style="margin-left: 1vw; font-size: 1.7vw;">Paleomapa</h2>
-    </div>
-  </div>
+<?php 
+  require_once "../components/header.php";
+?>
 
+<body>
   <div class="container d-flex align-items-center justify-content-center" style="margin-top: 20vh;">
     <form action="loginValidation.php" method="POST" id="loginForm" style="width: 30%;">
       <h1 class="h1 mb-3 text-center">Login</h1>

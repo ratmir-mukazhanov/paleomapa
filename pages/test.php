@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="../css/about_us.css">
   <link rel="stylesheet" href="../css/contact_us.css">
   
+  
+  
   <title>Paleomapa - HomePage</title>
 </head>
 
@@ -85,7 +87,184 @@
 
     <div>
         <div class="main-content" id="aboutUs">
-            <h1 class="section-title">Sobre Nós</h1>
+        <div class="about-us-section">
+    <div class="about-us-header">
+        <h1 class="section-title">Sobre Nós</h1>
+    </div>
+
+    <div class="about-cards-container">
+        <!-- Missão e Objetivos -->
+        <div class="about-card">
+            <div class="card-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+            <h2>Missão e Objetivos</h2>
+            <p>O Paleomapa nasceu com uma missão clara: Permitir o acesso a dados paleontológicos e arqueológicos 
+                através de uma plataforma interativa e intuitiva. O nosso objetivo principal é criar uma ponte entre o 
+                conhecimento científico especializado e o público geral, tornando a riqueza do patrimônio paleontológico acessível a todos.</p>
+            <div class="card-highlights">
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Disponibilização de dados paleontológicos em formato interativo e georreferenciado</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Promoção da investigação científica através da centralização de informações</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Apoio à educação através de recursos visuais e contextuais sobre paleontologia</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Fomento do turismo científico com a identificação de sítios paleontológicos relevantes e áreas de interesse.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- História e Contexto -->
+        <div class="about-card">
+            <div class="card-icon">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <h2>História e Contexto</h2>
+            <p>O projeto Paleomapa surgiu em Fevereiro de 2025, através da disciplina SIG, em que se identificou uma lacuna significativa: 
+                a ausência de uma plataforma unificada que integrasse dados paleontológicos em Portugal com uma interface acessível 
+                tanto para especialistas quanto para leigos interessados.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Fase de Conceptualização</h3>
+                        <p>Fevereiro e Março de 2025 - Identificação do problema e esboço inicial da solução</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Pesquisa e Recolha de Dados</h3>
+                        <p>Março de 2025 - Levantamento das fontes de dados disponíveis e estabelecimento de parcerias</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Desenvolvimento da Plataforma</h3>
+                        <p>Fim de Março a Junho de 2025 - Implementação da interface e integração dos dados geoespaciais</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Lançamento e Expansão</h3>
+                        <p>Junho de 2025 até o presente - Lançamento público e expansão contínua da base de dados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- A Equipa -->
+        <div class="about-card">
+            <div class="card-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h2>A Equipa</h2>
+            <p>O Paleomapa nasceu da mente brilhante (e ligeiramente cansada) de um grupo de alunos da ESTGA
+                 – Escola Superior de Tecnologia e Gestão de Águeda. Apesar de sermos todos estudantes, 
+                 tivemos a orientação sábia (e a paciência lendária) do Professor Luís Jorge Gonçalves, 
+                 que manteve o navio a flutuar mesmo quando parecia afundar em bugs, shapefiles e teorias de dinossauros perdidos. 
+                 Este projeto é a prova de que, com café, espírito de equipa e um professor com nervos de aço, tudo é possível.</p>
+            <div class="team-grid">
+        <div class="team-member">
+            <div class="member-avatar">
+                <img src="../img/gustavoGiao.png" alt="Perfil de membro da equipe">
+            </div>
+            <h3>Gustavo Gião</h3>
+            <p class="member-role">Chefe dos Mapas e da Moral</p>
+            <p>Responsável por dizer “malta, temos tempo” duas horas antes do deadline.</p>
+        </div>
+
+        <div class="team-member">
+            <div class="member-avatar">
+                <img src="../img/ratmir.jpg" alt="Perfil de membro da equipe">
+            </div>
+            <h3>Ratmir Mukazhanov</h3>
+            <p class="member-role">Feiticeiro Full-Stack</p>
+            <p>Fala JavaScript melhor que português. Debugga bugs que ele próprio criou, com orgulho e sem culpa.</p>
+        </div>
+
+        <div class="team-member">
+            <div class="member-avatar">
+                <img src="../img/filipe.jpg" alt="Perfil de membro da equipe">
+            </div>
+            <h3>Filipe Rocha</h3>
+            <p class="member-role">Senhor dos SIG</p>
+            <p>Se há um mapa, ele já pôs pins, layers, e até um easter egg. Consegue calcular distâncias a olho... quase sempre certo.</p>
+        </div>
+
+        <div class="team-member">
+            <div class="member-avatar">
+                <img src="../img/diogoSimao.png" alt="Perfil de membro da equipe">
+            </div>
+            <h3>Diogo Simão</h3>
+            <p class="member-role">Consultor Paleolol</p>
+            <p>Chamado para validar fósseis e fazer parecer que sabemos o que estamos a fazer. Garante que nenhum dino foi mal representado neste projeto.</p>
+        </div>
+        </div>
+        </div>
+
+        <!-- Fontes de Dados e Tecnologias -->
+        <div class="about-card">
+            <div class="card-icon">
+                <i class="fas fa-database"></i>
+            </div>
+            <h2>Fontes de Dados e Tecnologias</h2>
+            <p>O Paleomapa integra diversas fontes de dados e utiliza tecnologias modernas para oferecer uma experiência fluida e informativa aos usuários.</p>
+            
+            <div class="tech-section">
+                <h3>Fontes de Dados</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <i class="fas fa-map"></i>
+                        <span>Sistema Nacional de Informação Geográfica (SNIG)</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-university"></i>
+                        <span>Departamento de Geociências da Universidade de Aveiro</span>
+                    </div>
+                </div>
+                
+                <h3>Tecnologias Utilizadas</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>QGIS para processamento de dados geoespaciais</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-database"></i>
+                        <span>PostgreSQL/PostGIS para armazenamento espacial</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-layer-group"></i>
+                        <span>OpenLayers para visualização de mapas interativos</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-route"></i>
+                        <span>PgRouting para análise de rotas e proximidade</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-code"></i>
+                        <span>HTML5, CSS3 e JavaScript para interface do usuário</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Deck.gl para visualizações avançadas de dados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         </div>  
     </div> 
 
