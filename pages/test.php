@@ -79,6 +79,15 @@
                 <div id="filters">
                 <strong>Filtros:</strong><br>
                 <!-- Filtros -->
+
+                <label for="distanceInput">Distância de Cluster:</label>
+                <input type="range" id="distanceInput" min="1" max="100" value="10" step="1">
+                <span id="distanceValue">10</span><br><br>
+                
+                <label for="minDistanceInput">Distância Mínima:</label>
+                <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
+                <span id="minDistanceValue">5</span>
+                
                 </div>
             </div>
             </div>
