@@ -1,0 +1,32 @@
+#btnLogin {
+    background-color: #c2906d;
+    font-weight: 500;
+    border: 0vw;
+}
+
+#btnLogin:hover {
+    background-color: #c2906d;
+    font-weight: 500;
+    border: 0vw;
+    background-color: #8d7b69;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: 0.2s;
+}
+
+#textVoltar {
+    color: #c2906d;
+}
+
+.form-control:focus {
+    border-color: #c2906d;
+    box-shadow: 0 0 0 0.2rem rgba(194, 144, 109, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: #c2906d;
+    border-color: #c2906d;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(194, 144, 109, 0.25);
+}
