@@ -46,41 +46,48 @@ style: new ol.style.Style({
     
 const styleCache = {};
 const clustersLayer = new ol.layer.Vector({
-source: clusterSource,
-style: (feature) => {
-    const size = feature.get('features').length;
-    let style = styleCache[size];
-    if (!style) {
-    style = new ol.style.Style({
-        image: new ol.style.Circle({
-        radius: 10,
-        stroke: new ol.style.Stroke({
-            color: '#fff',
-        }),
-        fill: new ol.style.Fill({
-            color: '#3399CC',
-        }),
-        }),
-        text: new ol.style.Text({
-        text: size.toString(),
-        fill: new ol.style.Fill({
-            color: '#fff',
-        }),
-        }),
-    });
-    styleCache[size] = style;
-    }
-    return style;
-},
+    source: clusterSource,
+    style: (feature) => {
+        const size = feature.get('features').length;
+        let style = styleCache[size];
+        if (!style) {
+        style = new ol.style.Style({
+            image: new ol.style.Circle({
+            radius: 10,
+            stroke: new ol.style.Stroke({
+                color: '#fff',
+            }),
+            fill: new ol.style.Fill({
+                color: '#3399CC',
+            }),
+            }),
+            text: new ol.style.Text({
+            text: size.toString(),
+            fill: new ol.style.Fill({
+                color: '#fff',
+            }),
+            }),
+        });
+        styleCache[size] = style;
+        }
+        return style;
+    },
 });
 
+const defaultControls = new ol.control.defaults.defaults();
+
 const map = new ol.Map({
-target: 'map',
-layers: [...Object.values(layersMap), /*vectorLayer*/ clustersLayer],
-view: new ol.View({
-    center: ol.proj.fromLonLat([-8, 39.5]),
-    zoom: 6
-})
+    controls: defaultControls.extend([
+        new ol.control.FullScreen({
+            source: 'fullscreen',
+        }),
+    ]),
+    target: 'map',
+    layers: [...Object.values(layersMap), /*vectorLayer*/ clustersLayer],
+    view: new ol.View({
+        center: ol.proj.fromLonLat([-8, 39.5]),
+        zoom: 6
+    })
 });
 
 // Смена слоя по селектору

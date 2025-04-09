@@ -15,7 +15,34 @@
   <link rel="stylesheet" href="../css/about_us.css">
   <link rel="stylesheet" href="../css/contact_us.css">
   
-  
+  <style>
+      .map {
+        width: 100%;
+        height: 400px;
+      }
+      .fullscreen:-webkit-full-screen {
+        height: 100%;
+        margin: 0;
+      }
+
+      .fullscreen:fullscreen {
+        height: 100%;
+      }
+
+      .fullscreen {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 400px;
+      }
+
+      .map {
+        width: 80%;
+        height: 100%;
+        float: left;
+      }
+    </style>
+    
+
   
   <title>Paleomapa - HomePage</title>
 </head>
@@ -58,38 +85,37 @@
             <?php require_once "../components/header.php"; ?>
 
             <div class="layout-body">
-            <?php require_once "../components/sidebar.php"; ?>
+                <?php require_once "../components/sidebar.php"; ?>
 
-            <div class="main-content">
-                <div id="map"></div>
+                <div class="main-content" id="fullscreen">
+                    <div id="map"></div>
 
-                <div id="popup" class="ol-popup">
-                <div id="popup-content"></div>
+                    <div id="popup" class="ol-popup">
+                    <div id="popup-content"></div>
                 </div>
 
-                <div id="layer-toggle">
-                <label for="baselayer-select"><strong>Base Layer:</strong></label><br>
-                <select id="baselayer-select">
-                    <option value="standard">Padrão</option>
-                    <option value="humanitarian">Humanitário</option>
-                    <option value="topo">Topográfico</option>
-                </select>
-                </div>
+                    <div id="layer-toggle">
+                        <label for="baselayer-select"><strong>Base Layer:</strong></label><br>
+                        <select id="baselayer-select">
+                            <option value="standard">Padrão</option>
+                            <option value="humanitarian">Humanitário</option>
+                            <option value="topo">Topográfico</option>
+                        </select>
+                    </div>
 
-                <div id="filters">
-                <strong>Filtros:</strong><br>
-                <!-- Filtros -->
+                    <div id="filters">
+                        <strong>Filtros:</strong><br>
+                        <!-- Filtros -->
 
-                <label for="distanceInput">Distância de Cluster:</label>
-                <input type="range" id="distanceInput" min="1" max="100" value="10" step="1">
-                <span id="distanceValue">10</span><br><br>
-                
-                <label for="minDistanceInput">Distância Mínima:</label>
-                <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
-                <span id="minDistanceValue">5</span>
-                
+                        <label for="distanceInput">Distância de Cluster:</label>
+                        <input type="range" id="distanceInput" min="1" max="100" value="10" step="1">
+                        <span id="distanceValue">10</span><br><br>
+                        
+                        <label for="minDistanceInput">Distância Mínima:</label>
+                        <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
+                        <span id="minDistanceValue">5</span>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
