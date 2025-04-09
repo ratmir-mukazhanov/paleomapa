@@ -8,7 +8,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <nav class="sidebar-navigation">
 	<ul>
-		<a href="../pages/index.php">   
+		<!--<a href="../pages/index.php">-->
+		<a href="#homepage">   
 			<li class="<?= ($currentPage === 'index.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -19,7 +20,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="../pages/mapa.php">   
+		<!--<a href="../pages/mapa.php">-->
+		<a href="#mapaOpenlayers">
 			<li class="<?= ($currentPage === 'mapa.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -30,7 +32,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="../pages/routing.html">
+		<!--<a href="../pages/routing.html">-->
+		<a href="#">
 			<li class="<?= ($currentPage === 'routing.html') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -41,7 +44,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="../pages/about_us.php">
+		<!--<a href="../pages/about_us.php">-->
+		<a href="#aboutUs">
 			<li class="<?= ($currentPage === 'about_us.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
@@ -52,7 +56,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<a href="../pages/contact_us.php">
+		<!--<a href="../pages/contact_us.php">-->
+		<a href="#contacts">
 			<li class="<?= ($currentPage === 'contact_us.php') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">

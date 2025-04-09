@@ -21,7 +21,7 @@
           data-rss-feed="https://paleontologyworld.com/blog/feed" 
           data-rss-link-titles="true" 
           data-rss-title-wrapper="h3" 
-          data-rss-max="1">
+          data-rss-max="5">
       </div>
   </div>
 
