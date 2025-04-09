@@ -32,8 +32,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<!--<a href="../pages/routing.html">-->
-		<a href="#">
+		<a href="../pages/routing.html">
 			<li class="<?= ($currentPage === 'routing.html') ? 'active' : '' ?>">
 				<i>
 					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">

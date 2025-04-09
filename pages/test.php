@@ -23,16 +23,33 @@
     require_once "../components/header.php";
     require_once "../components/sidebar.php";
   ?>
-
-  <div class="main-content" id="homepage">
-      <div
-          class="rssFeed"
-          data-rss-feed="https://paleontologyworld.com/blog/feed" 
-          data-rss-link-titles="true" 
-          data-rss-title-wrapper="h3" 
-          data-rss-max="1">
+  <div id="homepage">
+    <h1 class="page-title">Últimas Descobertas Paleontológicas</h1>
+    <div class="content-wrapper">
+        <div class="featured-article">
+            <div class="featured-image">
+            <img src="../img/destaqueFossil.webp" alt="Viagem Paleontológica">
+            </div>
+        <div class="featured-content">
+        <h2 class="featured-title">Viaja no Tempo com a Paleontologia Interativa</h2>
+        <p class="featured-desc">Explora fósseis autênticos, sítios arqueológicos e pontos de interesse através de mapas interativos e dados reais. Descobre a história da vida na Terra com visualizações ricas, filtros geográficos e contexto científico – tudo num só portal. Junta-te à jornada pelas eras geológicas!</p>
+        <a href="#" class="featured-link">Explorar Agora</a>
+        </div>
+     </div>
+      <div class="news-container">
+        <div class="news-header">
+          <i class="fas fa-newspaper news-icon"></i>
+          <h2>Notícias Recentes</h2>
+        </div>
+        <div class="rssFeed" 
+            data-rss-feed="https://www.alfmuseum.org/feed/"
+            data-rss-link-titles="true"
+            data-rss-title-wrapper="h3"
+            data-rss-max="1">
+        </div>
       </div>
-  </div>
+    </div>
+    </div>
 
     <div class="mapaDiv" id="mapaOpenlayers">
         <div class="layout-wrapper">
@@ -70,7 +87,7 @@
         <div class="main-content" id="aboutUs">
             <h1 class="section-title">Sobre Nós</h1>
         </div>  
-    </div>
+    </div> 
 
     <div id="contacts">
         <div class="main-content">
