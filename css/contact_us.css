@@ -280,3 +280,13 @@ textarea.form-control {
     width: 80px;
     background-color: var(--accent-color);
 }
+
+/* Transiction and Hover */
+.contact-form, .contact-info, .faq-section {
+    transition: all 0.3s ease;
+}
+
+.contact-form:hover, .contact-info:hover, .faq-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}

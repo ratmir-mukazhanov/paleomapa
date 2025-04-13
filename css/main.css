@@ -220,7 +220,7 @@ html, body, #mapa {
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid var(--text-light);
+  border: 2px solid var(--highlight);
   border-radius: 4px;
   margin-right: 10px;
   transition: var(--transition);

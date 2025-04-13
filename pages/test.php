@@ -254,7 +254,7 @@
                 <i class="fas fa-database"></i>
             </div>
             <h2>Fontes de Dados e Tecnologias</h2>
-            <p>O Paleomapa integra diversas fontes de dados e utiliza tecnologias modernas para oferecer uma experiência fluida e informativa aos usuários.</p>
+            <p>O Paleomapa integra diversas fontes de dados e utiliza tecnologias modernas para oferecer uma experiência fluida e informativa aos utilizadores.</p>
             
             <div class="tech-section">
                 <h3>Fontes de Dados</h3>
@@ -289,11 +289,11 @@
                     </div>
                     <div class="tech-item">
                         <i class="fas fa-code"></i>
-                        <span>HTML5, CSS3 e JavaScript para interface do usuário</span>
+                        <span>HTML5, CSS3 e JavaScript para interface do utilizador</span>
                     </div>
                     <div class="tech-item">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Deck.gl para visualizações avançadas de dados</span>
+                        <i class="fas fa-terminal"></i>
+                        <span>PHP para lógica de backend e comunicação com a base de dados</span>
                     </div>
                 </div>
             </div>
