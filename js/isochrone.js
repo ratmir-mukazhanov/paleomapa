@@ -54,6 +54,9 @@ App.updateIsochrone = function() {
       App.state.isochrone.source.clear();
       App.state.fossils.source.clear();
       App.state.cafes.source.clear();
+      App.state.benchs.source.clear();
+      App.state.museums.source.clear();
+      App.state.archaelogical.source.clear();
 
       const features = App.state.geojsonFormat.readFeatures(data);
       App.state.isochrone.hull_turf = App.state.geojsonFormat.writeFeaturesObject(features);
@@ -65,6 +68,9 @@ App.updateIsochrone = function() {
 
       App.updateFossilsWithinIsochrone();
       App.updateCafesWithinIsochrone();
+      App.updateBenchsWithinIsochrone();
+      App.updateMuseumsWithinIsochrone();
+      App.updateArchaelogicalWithinIsochrone();
 
       const extent = App.state.isochrone.source.getExtent();
       App.state.map.getView().fit(extent);
@@ -73,6 +79,10 @@ App.updateIsochrone = function() {
       App.state.isochrone.layer.setVisible(true);
       App.state.fossils.layer.setVisible($('#toggle-fossils').is(':checked'));
       App.state.cafes.layer.setVisible($('#toggle-cafes').is(':checked'));
+      App.state.benchs.layer.setVisible($('#toggle-benchs').is(':checked'));
+      App.state.museums.layer.setVisible($('#toggle-museums').is(':checked'));
+      App.state.archaelogical.layer.setVisible($('#toggle-archaelogical').is(':checked'));
+
     }
   });
 };

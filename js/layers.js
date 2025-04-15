@@ -46,6 +46,57 @@ App.setupCafesLayer = function() {
   App.state.map.addLayer(App.state.cafes.layer);
 };
 
+App.setupBenchsLayer = function() {
+  App.state.benchs.source = new ol.source.Vector({
+    format: new ol.format.GeoJSON(),
+    projection: 'EPSG:4326'
+  });
+
+  App.state.benchs.layer = new ol.layer.Vector({
+    title: 'Zonas de Descanso',
+    nome: 'benchs_layer',
+    source: App.state.benchs.source,
+    style: App.createBenchStyles()
+  });
+
+  App.state.benchs.layer.set('selectable', true);
+  App.state.map.addLayer(App.state.benchs.layer);
+};
+
+App.setupMuseumsLayer = function() {
+  App.state.museums.source = new ol.source.Vector({
+    format: new ol.format.GeoJSON(),
+    projection: 'EPSG:4326'
+  });
+
+  App.state.museums.layer = new ol.layer.Vector({
+    title: 'Museus',
+    nome: 'museums_layer',
+    source: App.state.museums.source,
+    style: App.createMuseumStyles()
+  });
+
+  App.state.museums.layer.set('selectable', true);
+  App.state.map.addLayer(App.state.museums.layer);
+};
+
+App.setupArchaelogicalLayer = function() {
+  App.state.archaelogical.source = new ol.source.Vector({
+    format: new ol.format.GeoJSON(),
+    projection: 'EPSG:4326'
+  });
+
+  App.state.archaelogical.layer = new ol.layer.Vector({
+    title: 'Sítios de Arqueologia',
+    nome: 'archaelogical_layer',
+    source: App.state.archaelogical.source,
+    style: App.createArchaelogicalStyles()
+  });
+
+  App.state.archaelogical.layer.set('selectable', true);
+  App.state.map.addLayer(App.state.archaelogical.layer);
+};
+
 App.setupStartPointLayer = function() {
   // Cria a feature do ponto de partida
   App.state.startPoint.feature = new ol.Feature();
@@ -102,6 +153,39 @@ App.createCafeStyles = function() {
       anchor: [0.5, 1.0],   // Ajuste conforme desejar
       scale: 0.04,           // Ajuste conforme o tamanho que quer
       src: '../img/cafe.png' // Caminho do ícone
+    })
+  });
+};
+
+// Estilo para as Zonas de Descanso
+App.createBenchStyles = function() {
+  return new ol.style.Style({
+    image: new ol.style.Icon({
+      anchor: [0.5, 1.0],   // Ajuste conforme desejar
+      scale: 0.005,           // Ajuste conforme o tamanho que quer
+      src: '../img/bench.png' // Caminho do ícone
+    })
+  });
+};
+
+// Estilo para as Zonas de Descanso
+App.createMuseumStyles = function() {
+  return new ol.style.Style({
+    image: new ol.style.Icon({
+      anchor: [0.5, 1.0],   // Ajuste conforme desejar
+      scale: 0.04,           // Ajuste conforme o tamanho que quer
+      src: '../img/museum.png' // Caminho do ícone
+    })
+  });
+};
+
+// Estilo para as Zonas de Descanso
+App.createArchaelogicalStyles = function() {
+  return new ol.style.Style({
+    image: new ol.style.Icon({
+      anchor: [0.5, 1.0],   // Ajuste conforme desejar
+      scale: 0.02,           // Ajuste conforme o tamanho que quer
+      src: '../img/archaelogical.webp' // Caminho do ícone
     })
   });
 };

@@ -24,6 +24,18 @@ App.setupEventListeners = function() {
           content = "<div class='popup-content cafe-popup'>";
           content += "<h4>" + (feature.get("name") || "Café") + "</h4>";
           content += "</div>";
+        }else if (layer === App.state.benchs.layer) {
+          content = "<div class='popup-content cafe-popup'>";
+          content += "<h4>" + (feature.get("amenity") || "Zona de Descanso") + "</h4>";
+          content += "</div>";
+        }else if (layer === App.state.museums.layer) {
+          content = "<div class='popup-content cafe-popup'>";
+          content += "<h4>" + (feature.get("name") || "Museu") + "</h4>";
+          content += "</div>";
+        }else if (layer === App.state.archaelogical.layer) {
+          content = "<div class='popup-content cafe-popup'>";
+          content += "<h4>" + (feature.get("name") || "Sítio Arqueológico") + "</h4>";
+          content += "</div>";
         }
 
         if (content) {
@@ -39,7 +51,7 @@ App.setupEventListeners = function() {
     }
   });
 
-  // Checkboxes de visibilidade (escolas/cafes)
+  // Checkboxes de visibilidade (fósseis/cafes)
   $('#toggle-fossils').change(() => {
     const visible = $('#toggle-fossils').is(':checked');
     App.state.fossils.layer.setVisible(visible);
@@ -49,6 +61,22 @@ App.setupEventListeners = function() {
     const visible = $('#toggle-cafes').is(':checked');
     App.state.cafes.layer.setVisible(visible);
   });
+
+  $('#toggle-benchs').change(() => {
+    const visible = $('#toggle-benchs').is(':checked');
+    App.state.benchs.layer.setVisible(visible);
+  });
+
+  $('#toggle-museums').change(() => {
+    const visible = $('#toggle-museums').is(':checked');
+    App.state.museums.layer.setVisible(visible);
+  });
+
+  $('#toggle-archaelogical').change(() => {
+    const visible = $('#toggle-archaelogical').is(':checked');
+    App.state.archaelogical.layer.setVisible(visible);
+  });
+  
 
   // Modo de transporte
   $("input[type='radio']").change(() => {
@@ -75,7 +103,10 @@ App.handleMapClick = function(event) {
   App.state.isochrone.layer.setVisible(false);
   App.state.fossils.layer.setVisible(false);
   App.state.cafes.layer.setVisible(false);
-
+  App.state.benchs.layer.setVisible(false);
+  App.state.museums.layer.setVisible(false);
+  App.state.archaelogical.layer.setVisible(false);
+  
   // Descobre coords
   App.state.coordenadas_3857 = event.coordinate;
   App.state.coordenadas_4326 = ol.proj.transform(event.coordinate, 'EPSG:3857', 'EPSG:4326');

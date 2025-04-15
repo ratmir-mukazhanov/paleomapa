@@ -33,29 +33,46 @@ html, body, #mapa {
 
 /* Caixa de seleção de camadas */
 #toolbox {
-  top: 15px;
-  right: 100px;
+  top: 25px;
+  right: 62px;
+  background: rgba(67, 56, 49, 0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 18px;
+  color: var(--text-white);
+  width: auto;
 }
 
 #toolbox ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 #toolbox ul li {
-  margin: 10px 0;
+  margin: 1px 0;
 }
 
 #toolbox label {
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(101, 89, 78, 0.4), rgba(101, 89, 78, 0.7));
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #toolbox input[type="radio"] {
-  margin-right: 8px;
+  margin-right: 10px;
   appearance: none;
   width: 18px;
   height: 18px;
@@ -63,6 +80,7 @@ html, body, #mapa {
   border-radius: 50%;
   outline: none;
   transition: var(--transition);
+  background-color: transparent;
 }
 
 #toolbox input[type="radio"]:checked {
@@ -72,70 +90,156 @@ html, body, #mapa {
 
 /* Botões de transporte */
 #toolbox1 {
-  top: 160px;
+  top: 195px;
   right: 60px;
+  background: rgba(67, 56, 49, 0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 18px;
 }
 
 #meio_transporte {
   margin: 0;
   padding: 0;
   background: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 #meio_transporte .btn {
   display: flex;
   align-items: center;
   text-align: left;
-  padding: 10px 15px;
+  padding: 14px 18px;
   border: none;
   color: var(--text-light);
-  background: var(--panel-light);
-  margin-bottom: 8px;
-  border-radius: 6px;
-  transition: var(--transition);
-  font-weight: 500;
+  background: linear-gradient(145deg, rgba(101, 89, 78, 0.4), rgba(101, 89, 78, 0.7));
+  margin-bottom: 0;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Modificando o ::before para não interferir com o texto */
+#meio_transporte .btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--accent-color);
+  transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 0; /* Colocando embaixo do conteúdo */
+  opacity: 0.6; /* Para não escurecer demais o texto */
 }
 
 #meio_transporte .btn i {
-  margin-right: 10px;
-  font-size: 16px;
+  margin-right: 12px;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Escondendo os inputs de rádio que podem estar aparecendo */
+#meio_transporte .btn input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
 #meio_transporte .btn.active,
 #meio_transporte .btn:hover,
 #meio_transporte .btn:focus {
-  background-color: var(--accent-color) !important;
-  color: var(--primary-dark) !important;
-  border-color: var(--accent-color) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-1px);
+  background-image: none !important;
+  background-color: transparent !important; /* Tornando transparente para o ::before aparecer */
+  color: #ffffff !important; /* Branco fixo */
+  border-color: transparent !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+#meio_transporte .btn.active::before,
+#meio_transporte .btn:hover::before,
+#meio_transporte .btn:focus::before {
+  width: 100%;
+}
+
+#meio_transporte .btn.active i,
+#meio_transporte .btn:hover i,
+#meio_transporte .btn:focus i {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
 }
 
 /* Slider de tempo */
-/* Restaurando layout de antes, porém com as cores novas */
 #container_slider {
-  top: 270px;
-  right: 70px;
+  top: 450px;
+  right: 60px;
+  background: rgba(67, 56, 49, 0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 18px 22px;
 }
 
-/* container_slider já tem padding: 16px vindo do estilo comum, se preferir menos, ajuste aqui */
 #sliderdiv {
   padding: 5px 0;
 }
 
-/* Deixa o slider horizontal sem ocupar 100% se quiser fixo, ou mantenha como antes */
 .slider.slider-horizontal {
-  width: 200px; /* Ajuste conforme desejar */
+  width: 200px;
+  height: 20px;
+}
+
+#sl1Slider .slider-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 #sl1Slider .slider-selection {
   background: var(--accent-color);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
 }
+
 #sl1Slider .slider-handle {
   background: var(--primary-dark);
   border: 2px solid var(--accent-color);
   cursor: pointer;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+#sl1Slider .slider-handle:hover,
+#sl1Slider .slider-handle:active {
+  transform: scale(1.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
 .slider-handle.round {
   border-radius: 50%;
 }
@@ -143,38 +247,54 @@ html, body, #mapa {
 .tooltip-inner {
   background-color: var(--primary-dark);
   font-weight: bold;
-  padding: 5px 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 .tooltip.top .tooltip-arrow {
   border-top-color: var(--primary-dark);
 }
 
+.tooltip.top {
+  margin-top: -8px;
+}
+
 /* Popup de OpenLayers */
 .ol-popup {
-  max-width: 340px;
-  min-width: 120px;
+  max-width: 360px;
+  min-width: 160px;
   font-size: 15px;
   color: var(--primary-dark);
-  background-color: #ffffff;
-  border: none;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  padding: 15px;
-  animation: popFade 0.3s ease-out;
+  background: linear-gradient(145deg, #ffffff, #f3f0ea);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 18px;
+  animation: popFade 0.15s ease-out;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 @keyframes popFade {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: scale(0.95) translateY(5px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .ol-popup img {
   float: left;
   margin: 0 15px 10px 0;
-  max-width: 120px;
-  max-height: 120px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 110px;
+  max-height: 110px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.ol-popup img:hover {
+  transform: scale(1.03);
 }
 
 /* Filtros do lado esquerdo */
@@ -183,30 +303,40 @@ html, body, #mapa {
   top: 60px;
   left: 15px;
   z-index: 100;
-  width: 190px;
+  width: 220px;
 }
 
 .layer-filters {
   margin-top: 15px;
+  background: rgba(67, 56, 49, 0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 18px;
 }
 
 .layer-filters h4 {
-  margin: 0 0 15px 0;
-  font-size: 17px;
-  font-weight: bold;
-  color: var(--highlight);
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-light);
   border-bottom: 2px solid var(--accent-color);
-  padding-bottom: 8px;
+  padding-bottom: 10px;
+  letter-spacing: 0.5px;
 }
 
 .layer-filters ul {
   list-style: none;
   padding-left: 0;
   margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .layer-filters li {
-  margin: 12px 0;
+  margin: 0;
 }
 
 .layer-filters label {
@@ -214,39 +344,56 @@ html, body, #mapa {
   align-items: center;
   cursor: pointer;
   font-weight: 500;
+  color: var(--text-light);
+  transition: var(--transition);
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.layer-filters label:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(3px);
 }
 
 .layer-filters input[type="checkbox"] {
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--highlight);
-  border-radius: 4px;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  margin-right: 12px;
   transition: var(--transition);
   position: relative;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .layer-filters input[type="checkbox"]:checked {
   background: var(--accent-color);
   border-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(233, 162, 59, 0.4);
 }
 
 .layer-filters input[type="checkbox"]:checked:after {
-  content: '✓';
+  content: '';
   position: absolute;
-  color: var(--primary-dark);
-  font-size: 14px;
-  top: -1px;
-  left: 3px;
+  width: 6px;
+  height: 12px;
+  border: solid var(--primary-dark);
+  border-width: 0 2px 2px 0;
+  top: 1px;
+  left: 6px;
+  transform: rotate(45deg);
 }
 
 .layer-filters i {
-  margin-right: 8px;
-  color: var(--highlight);
-  font-size: 16px;
-  width: 20px;
-  text-align: center;
+  margin-right: 12px;
+  color: var(--accent-color);
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Créditos */

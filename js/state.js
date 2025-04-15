@@ -22,6 +22,24 @@ App.state = {
     source: null,
     layer: null
   },
+  benchs: {
+    benchs_turf: null,
+    benchsDentroHull: null,
+    source: null,
+    layer: null
+  },
+  museums: {
+    museums_turf: null,
+    museumsDentroHull: null,
+    source: null,
+    layer: null
+  },
+  archaelogical: {
+    archaelogical_turf: null,
+    archaelogicalDentroHull: null,
+    source: null,
+    layer: null
+  },
   geojsonFormat: new ol.format.GeoJSON(),
   startPoint: {
     feature: null,

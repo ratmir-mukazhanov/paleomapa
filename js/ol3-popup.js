@@ -64,6 +64,7 @@ ol.Overlay.Popup.prototype.show = function(coord, html) {
     this.setPosition(coord);
     this.content.innerHTML = html;
     this.container.style.display = 'block';
+    this.container.classList.add('ol-visible');
     if (this.panMapIfOutOfView) {
         this.panIntoView_(coord);
     }
@@ -127,5 +128,6 @@ ol.Overlay.Popup.prototype.panIntoView_ = function(coord) {
  */
 ol.Overlay.Popup.prototype.hide = function() {
     this.container.style.display = 'none';
+    this.container.classList.remove('ol-visible');  
     return this;
 };

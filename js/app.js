@@ -9,6 +9,9 @@ App.init = function() {
   App.setupIsochroneLayer();
   App.setupFossilsLayer();
   App.setupCafesLayer();
+  App.setupBenchsLayer();
+  App.setupMuseumsLayer();
+  App.setupArchaelogicalLayer();
   App.setupStartPointLayer();
 
   // Configurar popup
@@ -81,12 +84,24 @@ App.loadInitialData = function() {
   // Isócrona inicial
   App.loadInitialIsochrone();
 
-  // Escolas
+  // Fosséis
   App.loadFossilsData();
 
   // Cafés
   App.loadCafesData();
   App.updateCafesWithinIsochrone();
+
+  // Zonas de Descanso
+  App.loadBenchsData();
+  App.updateBenchsWithinIsochrone();
+
+  // Museus
+  App.loadMuseumsData();
+  App.updateMuseumsWithinIsochrone();
+
+  // Sítios Arqueológicos
+  App.loadArchaelogicalData();
+  App.updateArchaelogicalWithinIsochrone();
 
   // Recarrega isócrona para garantir que tudo se encaixe
   App.loadInitialIsochrone();
