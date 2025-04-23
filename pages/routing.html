@@ -60,11 +60,40 @@
         </label>
       </div>
     </div>
-    <!-- Slider de tempo -->
+    <!-- Tempo de percurso -->
     <div id="container_slider">
-      <div id="sliderdiv">
-        <input id="sl1" type="text" data-slider-id="sl1Slider" data-slider-min="5" data-slider-max="60"
-          data-slider-step="5" data-slider-value="15">
+      <h4 class="time_heading">Tempo de Percurso (min)</h4>
+      <div id="tempo_percurso" class="time-options">
+        <label class="time-option active">
+          <input type="radio" name="tempo" value="5" autocomplete="off" checked>
+          <span class="icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </span>
+          <span class="time-text">5</span>
+        </label>
+        <label class="time-option">
+          <input type="radio" name="tempo" value="10" autocomplete="off">
+          <span class="icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </span>
+          <span class="time-text">10</span>
+        </label>
+        <label class="time-option">
+          <input type="radio" name="tempo" value="15" autocomplete="off">
+          <span class="icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </span>
+          <span class="time-text">15</span>
+        </label>
       </div>
     </div>
     <!-- Filtros do lado esquerdo (movido para dentro da div "mapa") -->
@@ -84,11 +113,30 @@
   <!-- Slider Init Script -->
   <script>
     $("#sl1").slider({
+      min: 5,
+      max: 15,
+      step: 5,
+      value: 10,
+      tooltip: 'always',
       formatter: function (value) {
         return value + ' min';
-      },
-      tooltip: 'always'
+      }
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const timeOptions = document.querySelectorAll('.time-option');
+      
+    timeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // Remove active class from all options
+          timeOptions.forEach(opt => opt.classList.remove('active'));
+          
+          // Add active class to clicked option
+          this.classList.add('active');
+        });
+      });
+    });
+
   </script>
 </body>
 </html>

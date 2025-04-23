@@ -52,34 +52,58 @@
     require_once "../components/header.php";
     require_once "../components/sidebar.php";
   ?>
-  <div id="homepage">
+    <div id="homepage">
     <h1 class="page-title">Últimas Descobertas Paleontológicas</h1>
     <div class="content-wrapper">
         <div class="featured-article">
-            <div class="featured-image">
+        <div class="featured-image">
             <img src="../img/destaqueFossil.webp" alt="Viagem Paleontológica">
-            </div>
+        </div>
         <div class="featured-content">
-        <h2 class="featured-title">Viaja no Tempo com a Paleontologia Interativa</h2>
-        <p class="featured-desc">Explora fósseis autênticos, sítios arqueológicos e pontos de interesse através de mapas interativos e dados reais. Descobre a história da vida na Terra com visualizações ricas, filtros geográficos e contexto científico – tudo num só portal. Junta-te à jornada pelas eras geológicas!</p>
-        <a href="#" class="featured-link">Explorar Agora</a>
+            <div class="featured-tag">Destaque</div>
+            <h2 class="featured-title">Viaja no Tempo com a Paleontologia Interativa</h2>
+            <p class="featured-desc">Explora fósseis autênticos, sítios arqueológicos e pontos de interesse através de mapas interativos e dados reais. Descobre a história da vida na Terra com visualizações ricas, filtros geográficos e contexto científico – tudo num só portal. Junta-te à jornada pelas eras geológicas!</p>
+            <div class="featured-links">
+            <a href="#mapaOpenlayers" class="featured-link primary-link">
+                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                Explorar Agora
+            </a>
+            <a href="../pages/routing.html" class="featured-link secondary-link">
+                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                </svg>
+                Explorar Roteiro
+            </a>
+            </div>
         </div>
-     </div>
-      <div class="news-container">
+        </div>
+        
+        <div class="news-container">
         <div class="news-header">
-          <i class="fas fa-newspaper news-icon"></i>
-          <h2>Notícias Recentes</h2>
+            <div class="news-header-content">
+            <svg class="news-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                <path d="M18 14h-8"></path>
+                <path d="M18 18h-8"></path>
+                <path d="M18 10h-8"></path>
+            </svg>
+            <h2>Notícias Recentes</h2>
+            </div>
+            <div class="news-subtitle">Mantenha-se informado</div>
         </div>
-        <div class="rssFeed" 
+        <div class="rssFeed"
             data-rss-feed="https://www.alfmuseum.org/feed/"
             data-rss-link-titles="true"
             data-rss-title-wrapper="h3"
             data-rss-max="1">
         </div>
-      </div>
+        </div>
     </div>
     </div>
-
     <div class="mapaDiv" id="mapaOpenlayers">
         <div class="layout-wrapper">
             <?php require_once "../components/header.php"; ?>
@@ -399,6 +423,5 @@
         });
     });
     </script>
-
 </body>
 </html>

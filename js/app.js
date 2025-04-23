@@ -77,9 +77,12 @@ App.switchBaseLayer = function() {
 
 // Carregamento inicial de dados e layers
 App.loadInitialData = function() {
-  // Define coords iniciais do ponto
-  App.state.coordenadas_4326 = [-8.657054901123049, 40.631835142937256];
-  App.state.startPoint.feature.setGeometry(new ol.geom.Point([-963705.332976185, 4958180.85218552]));
+  // Usa as coords iniciais da config
+  App.state.coordenadas_4326 = App.config.initialCoords;
+
+  // Converte para 3857 corretamente
+  const projected = ol.proj.transform(App.state.coordenadas_4326, 'EPSG:4326', 'EPSG:3857');
+  App.state.startPoint.feature.setGeometry(new ol.geom.Point(projected));
 
   // Isócrona inicial
   App.loadInitialIsochrone();

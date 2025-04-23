@@ -8,7 +8,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <nav class="sidebar-navigation">
 	<ul>
-		<!--<a href="../pages/index.php">-->
+		
 		<a href="#homepage">   
 			<li class="<?= ($currentPage === 'index.php') ? 'active' : '' ?>">
 				<i>
@@ -20,7 +20,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<!--<a href="../pages/mapa.php">-->
 		<a href="#mapaOpenlayers">
 			<li class="<?= ($currentPage === 'mapa.php') ? 'active' : '' ?>">
 				<i>
@@ -43,7 +42,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<!--<a href="../pages/about_us.php">-->
 		<a href="#aboutUs">
 			<li class="<?= ($currentPage === 'about_us.php') ? 'active' : '' ?>">
 				<i>
@@ -55,7 +53,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 			</li>
 		</a>
 
-		<!--<a href="../pages/contact_us.php">-->
 		<a href="#contacts">
 			<li class="<?= ($currentPage === 'contact_us.php') ? 'active' : '' ?>">
 				<i>

@@ -8,11 +8,14 @@ App.buildIsochroneUrl = function(lat, lon, costingMode, time) {
 };
 
 App.loadInitialIsochrone = function() {
+  const time = parseInt($("input[name='tempo']:checked").val(), 10);
+  const costingMode = App.config.transportModes[App.state.currentTransportMode];
+
   const routing_url = App.buildIsochroneUrl(
     App.config.initialCoords[1],
     App.config.initialCoords[0],
-    'pedestrian',
-    20
+    costingMode,
+    time
   );
 
   $.ajax({
@@ -36,7 +39,12 @@ App.loadInitialIsochrone = function() {
 };
 
 App.updateIsochrone = function() {
-  const time = $('#sl1').val();
+  let time = parseInt($("input[name='tempo']:checked").val(), 10);
+  
+  // Garante que não passa de 15 minutos
+  if (time > 15) time = 15;
+  if (time < 5) time = 5;
+
   const costingMode = App.config.transportModes[App.state.currentTransportMode];
 
   const routing_url = App.buildIsochroneUrl(

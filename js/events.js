@@ -85,9 +85,15 @@ App.setupEventListeners = function() {
   });
 
   // Slider
-  $('#sl1').on('slideStop', () => {
-    App.updateIsochrone();
+  $("input[name='tempo']").each(function () {
+    const label = $(this).closest('label');
+    if ($(this).is(':checked')) {
+      label.addClass('active');
+    } else {
+      label.removeClass('active');
+    }
   });
+  
 
   // Camada base
   $("#layerswitcher input[name=layer]").change(() => {

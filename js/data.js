@@ -1,4 +1,4 @@
-// Carrega dados de escolas e cafés + filtra via Turf
+// Carrega dados da bd + filtra via Turf
 window.App = window.App || {};
 
 App.loadFossilsData = function() {
@@ -44,7 +44,6 @@ App.loadCafesData = function() {
 
       App.state.cafes.cafes_turf = data;
 
-      // Adiciona inicialmente (se quiser ver todos de cara):
       App.state.cafes.source.addFeatures(App.state.geojsonFormat.readFeatures(data, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
@@ -81,7 +80,6 @@ App.loadBenchsData = function() {
 
       App.state.benchs.benchs_turf = data;
 
-      // Adiciona inicialmente (se quiser ver todos de cara):
       App.state.benchs.source.addFeatures(App.state.geojsonFormat.readFeatures(data, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
@@ -118,7 +116,6 @@ App.loadMuseumsData = function() {
 
       App.state.museums.museums_turf = data;
 
-      // Adiciona inicialmente (se quiser ver todos de cara):
       App.state.museums.source.addFeatures(App.state.geojsonFormat.readFeatures(data, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
@@ -155,7 +152,6 @@ App.loadArchaelogicalData = function() {
 
       App.state.archaelogical.archaelogical_turf = data;
 
-      // Adiciona inicialmente (se quiser ver todos de cara):
       App.state.archaelogical.source.addFeatures(App.state.geojsonFormat.readFeatures(data, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
