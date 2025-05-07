@@ -20,6 +20,7 @@
         width: 100%;
         height: 400px;
       }
+      
       .fullscreen:-webkit-full-screen {
         height: 100%;
         margin: 0;

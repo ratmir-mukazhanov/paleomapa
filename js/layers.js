@@ -105,22 +105,13 @@ App.setupStartPointLayer = function() {
   const startPointStyle = [
     new ol.style.Style({
       image: new ol.style.Icon({
-        opacity: 0.75,
         anchor: [0.5, 300],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
-        src: '../img/start.png',
-        scale: 0.15
+        src: '../img/star.png',
+        scale: 0.07
       })
     }),
-    new ol.style.Style({
-      image: new ol.style.Circle({
-        radius: 5,
-        fill: new ol.style.Fill({
-          color: 'rgba(230,120,30,0.7)'
-        })
-      })
-    })
   ];
 
   App.state.startPoint.feature.setStyle(startPointStyle);

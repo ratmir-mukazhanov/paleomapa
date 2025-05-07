@@ -61,15 +61,23 @@ ol.inherits(ol.Overlay.Popup, ol.Overlay);
  * @param {String} html String of HTML to display within the popup.
  */
 ol.Overlay.Popup.prototype.show = function(coord, html) {
-    this.setPosition(coord);
     this.content.innerHTML = html;
+    // Mostra o popup sem animação para já
     this.container.style.display = 'block';
+    // Define a posição (agora já visível, o DOM pode posicionar corretamente)
+    this.setPosition(coord);
+    // Força reflow para garantir que a posição foi aplicada
+    void this.container.offsetWidth;
+    // Só agora adiciona a classe que dispara a animação
     this.container.classList.add('ol-visible');
+
     if (this.panMapIfOutOfView) {
         this.panIntoView_(coord);
     }
+
     return this;
 };
+
 
 /**
  * @private

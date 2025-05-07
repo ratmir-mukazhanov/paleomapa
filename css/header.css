@@ -100,3 +100,14 @@ body {
     vertical-align: middle;
     object-fit: contain;
 }
+
+#headerLogo a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: inherit;
+  }
+  
+  #headerLogo a:hover {
+    text-decoration: none;
+  }

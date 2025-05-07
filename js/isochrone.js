@@ -46,6 +46,10 @@ App.updateIsochrone = function() {
   if (time < 5) time = 5;
 
   const costingMode = App.config.transportModes[App.state.currentTransportMode];
+  
+  // Guarda o zoom atual antes de fazer alterações
+  const currentZoom = App.state.map.getView().getZoom();
+  const currentCenter = App.state.map.getView().getCenter();
 
   const routing_url = App.buildIsochroneUrl(
     App.state.coordenadas_4326[1],
@@ -80,8 +84,8 @@ App.updateIsochrone = function() {
       App.updateMuseumsWithinIsochrone();
       App.updateArchaelogicalWithinIsochrone();
 
-      const extent = App.state.isochrone.source.getExtent();
-      App.state.map.getView().fit(extent);
+      App.state.map.getView().setCenter(ol.proj.transform(App.state.coordenadas_4326, 'EPSG:4326', 'EPSG:3857'));
+      App.state.map.getView().setZoom(currentZoom);
 
       // Ajustar visibilidade
       App.state.isochrone.layer.setVisible(true);
@@ -90,7 +94,6 @@ App.updateIsochrone = function() {
       App.state.benchs.layer.setVisible($('#toggle-benchs').is(':checked'));
       App.state.museums.layer.setVisible($('#toggle-museums').is(':checked'));
       App.state.archaelogical.layer.setVisible($('#toggle-archaelogical').is(':checked'));
-
     }
   });
 };

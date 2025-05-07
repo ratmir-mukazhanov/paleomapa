@@ -10,8 +10,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <ul class="headerUL">
     <li id="headerLogo" class="headerList">
-        <img src="../img/logoFossils.png" alt="Paleomapa Logo" class="header-logo">
-        <span id="headerTitlePage">Paleomapa</span>
+        <a href="../pages/main.php">
+            <img src="../img/logoFossils.png" alt="Paleomapa Logo" class="header-logo">
+            <span id="headerTitlePage">Paleomapa</span>
+        </a>
     </li>
 
     <li id="loginHeader" class="headerList">

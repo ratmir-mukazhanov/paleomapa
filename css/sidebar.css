@@ -28,11 +28,13 @@ a {
     background-color: var(--sidebar-background-color);
     box-shadow: var(--shadow);
     z-index: 998;
-    overflow-y: auto;
+    overflow-x: hidden; /* Impede scroll horizontal */
 }
 
 .sidebar-navigation ul {
     text-align: center;
+    width: 100%;
+    padding: 0;
 }
 
 .sidebar-navigation ul li {
@@ -40,13 +42,20 @@ a {
     cursor: pointer;
     transition: var(--transition);
     position: relative;
+    width: 100%;
 }
 
 .sidebar-navigation ul li i {
-    display: block;
-    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: var(--transition);
     color: var(--text-light);
+}
+
+.sidebar-navigation ul li i svg {
+    width: 24px;
+    height: 24px;
 }
 
 .sidebar-navigation ul li .tooltip {
@@ -64,6 +73,7 @@ a {
     letter-spacing: .5px;
     transition: var(--transition);
     z-index: 10;
+    white-space: nowrap; /* Impede quebra de linha no tooltip */
 }
 
 .sidebar-navigation ul li .tooltip:before {

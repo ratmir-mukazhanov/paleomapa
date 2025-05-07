@@ -2,50 +2,51 @@
 window.App = window.App || {};
 
 App.setupEventListeners = function() {
-  // Clique no mapa: se clicou num café ou escola, popup. Senão, isócrona.
   App.state.map.on('click', (event) => {
     let featureClicked = false;
+  
     App.state.map.forEachFeatureAtPixel(event.pixel, (feature, layer) => {
       if (layer && layer.get('selectable') === true) {
         featureClicked = true;
-        // Fechar popup anterior
         App.state.popup.hide();
-
-        // Popup
-        let content = "";
+  
+        let icon = '';
+        let title = '';
+        let htmlDetails = '';
+  
         if (layer === App.state.fossils.layer) {
-          content = "<div class='popup-content fossil-popup'>";
-          content += "<h4>" + (feature.get("title") || "Fóssil") + "</h4>";
-          content += "<p><b>Kingdom:</b> " + (feature.get("kingdom") || "N/A") + "</p>";
-          content += "<p><b>Descoberto por:</b> " + (feature.get("discovered_by") || "N/A") + "</p>";
-          content += "</div>";
-        } 
-        else if (layer === App.state.cafes.layer) {
-          content = "<div class='popup-content cafe-popup'>";
-          content += "<h4>" + (feature.get("name") || "Café") + "</h4>";
-          content += "</div>";
-        }else if (layer === App.state.benchs.layer) {
-          content = "<div class='popup-content cafe-popup'>";
-          content += "<h4>" + (feature.get("amenity") || "Zona de Descanso") + "</h4>";
-          content += "</div>";
-        }else if (layer === App.state.museums.layer) {
-          content = "<div class='popup-content cafe-popup'>";
-          content += "<h4>" + (feature.get("name") || "Museu") + "</h4>";
-          content += "</div>";
-        }else if (layer === App.state.archaelogical.layer) {
-          content = "<div class='popup-content cafe-popup'>";
-          content += "<h4>" + (feature.get("name") || "Sítio Arqueológico") + "</h4>";
-          content += "</div>";
+          icon = '<i class="fas fa-bone"></i>';
+          title = feature.get("title") || "Fóssil";
+          htmlDetails = `
+            <p><b>Reino:</b> ${feature.get("kingdom") || "N/A"}</p>
+            <p><b>Descoberto por:</b> ${feature.get("discovered_by") || "N/A"}</p>
+          `;
+        } else if (layer === App.state.cafes.layer) {
+          icon = '<i class="fas fa-coffee"></i>';
+          title = feature.get("name") || "Café";
+        } else if (layer === App.state.benchs.layer) {
+          icon = '<i class="fas fa-chair"></i>';
+          title = "Zona de Descanso";
+        } else if (layer === App.state.museums.layer) {
+          icon = '<i class="fas fa-landmark"></i>';
+          title = feature.get("name") || "Museu";
+        } else if (layer === App.state.archaelogical.layer) {
+          icon = '<i class="fas fa-archway"></i>';
+          title = feature.get("name") || "Sítio Arqueológico";
         }
-
-        if (content) {
-          App.state.popup.show(feature.getGeometry().getCoordinates(), content);
-        }
-        return true; // Para interromper
+  
+        const popupContent = `
+          <div class="popup-custom">
+            <div class="popup-header">${icon}<h4>${title}</h4></div>
+            <div class="popup-body">${htmlDetails}</div>
+          </div>
+        `;
+  
+        App.state.popup.show(feature.getGeometry().getCoordinates(), popupContent);
+        return true;
       }
     });
-
-    // Se não feature, clique é p/ routing
+  
     if (!featureClicked) {
       App.handleMapClick(event);
     }
@@ -102,6 +103,9 @@ App.setupEventListeners = function() {
 };
 
 App.handleMapClick = function(event) {
+  if (App.state.popup) {
+    App.state.popup.hide();
+  }
   // Apaga geometry do ponto inicial
   App.state.startPoint.feature.setGeometry(null);
 

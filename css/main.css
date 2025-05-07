@@ -294,39 +294,153 @@ html, body, #mapa {
 
 /* Popup de OpenLayers */
 .ol-popup {
-  max-width: 360px;
-  min-width: 160px;
+  max-width: 380px;
+  min-width: 280px;
   font-size: 15px;
-  color: var(--primary-dark);
-  background: linear-gradient(145deg, #ffffff, #f3f0ea);
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  padding: 18px;
-  animation: popFade 0.15s ease-out;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  backdrop-filter: blur(3px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: #433831;
+  background: linear-gradient(145deg, #f8f5f0, #ede8e0);
+  border-radius: 18px;
+  box-shadow: 0 12px 20px rgba(94, 73, 56, 0.25);
+  border: 1px solid rgba(185, 161, 126, 0.3);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes popFade {
-  from { opacity: 0; transform: scale(0.95) translateY(5px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+/* Barra colorida na parte superior */
+.ol-popup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--accent-color), #c8974f);
+  z-index: 1;
 }
 
+/* Imagem do popup com borda estilo fóssil */
 .ol-popup img {
   float: left;
-  margin: 0 15px 10px 0;
-  max-width: 110px;
-  max-height: 110px;
-  border-radius: 8px;
+  margin: 0 16px 10px 0;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   object-fit: cover;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
+  border: 3px solid rgba(185, 161, 126, 0.6);
+  padding: 3px;
 }
 
 .ol-popup img:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(94, 73, 56, 0.3);
 }
+
+/* Estilo customizado para o popup */
+.popup-custom {
+  font-family: 'Segoe UI', sans-serif;
+  color: #433831;
+  padding: 5px 2px;
+}
+
+/* Cabeçalho do popup com ícones temáticos */
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed rgba(185, 161, 126, 0.5);
+}
+
+.popup-header i {
+  font-size: 24px;
+  color: var(--accent-color);
+  min-width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(233, 217, 188, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(94, 73, 56, 0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.popup-header i:hover {
+  transform: rotate(5deg);
+  background: rgba(233, 217, 188, 0.7);
+}
+
+.popup-header h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #433831;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+/* Conteúdo do popup */
+.popup-body {
+  font-size: 15px;
+  line-height: 1.5em;
+  color: #5a4e44;
+}
+
+.popup-body p {
+  margin: 8px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+/* Pequeno detalhe fóssil antes de cada parágrafo */
+.popup-body p:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-size: 18px;
+}
+
+/* Botão de fechar mais elegante */
+.ol-popup-closer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-decoration: none;
+  color: #85735f;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(233, 217, 188, 0.4);
+  transition: all 0.2s ease;
+}
+
+.ol-popup-closer:hover {
+  background: rgba(233, 217, 188, 0.8);
+  color: #433831;
+  transform: rotate(90deg);
+}
+
+.ol-popup-closer:after {
+  content: "×";
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Classe para animar quando visível */
+.ol-popup.ol-visible {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* Filtros do lado esquerdo */
 #left-filters {
