@@ -11,13 +11,13 @@
 
 body {
     background-color: var(--background-color);
-    color: var(--text-white);
+    color: var(--text-black);
     margin: 0;
     padding: 0;
 }
 
 a {
-    color: var(--text-white);
+    color: var(--text-black);
     text-decoration: none;
 }
 
@@ -52,7 +52,7 @@ a {
     justify-content: center;
     align-items: center;
     transition: var(--transition);
-    color: var(--text-white);
+    color: var(--text-black);
 }
 
 .sidebar-navigation ul li i svg {
@@ -64,7 +64,7 @@ a {
     display: inline-block;
     position: absolute;
     background-color: var(--tooltip-background-color);
-    color: var(--text-white);
+    color: var(--text-black);
     padding: 8px 15px;
     border-radius: var(--border-radius);
     margin-top: -26px;
