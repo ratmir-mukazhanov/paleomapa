@@ -1,13 +1,26 @@
 <?php
 $currentPage = basename($_SERVER['PHP_SELF']);
+$currentAnchor = '';
+
+// Verificar se há uma âncora na URL
+if (isset($_SERVER['REQUEST_URI'])) {
+    $parts = parse_url($_SERVER['REQUEST_URI']);
+    if (isset($parts['fragment'])) {
+        $currentAnchor = $parts['fragment'];
+    }
+}
+
+// Detectar se estamos na pasta admin para ajustar os links
+$isAdminSection = strpos($_SERVER['PHP_SELF'], '/admin/') !== false;
+$baseUrl = $isAdminSection ? '../pages/' : '';
 ?>
 <link rel="stylesheet" href="../css/sidebar.css">
 <link rel="stylesheet" href="../css/cores.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <nav class="sidebar-navigation">
     <ul>
-        <a href="#homepage">  
-            <li class="<?= ($currentPage === 'index.php') ? 'active' : '' ?>">
+        <a href="<?= $isAdminSection ? '../pages/main.php#homepage' : '#homepage' ?>">
+            <li class="<?= ($currentPage === 'index.php' || $currentPage === 'main.php') ? 'active' : '' ?>">
                 <i>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#FFFFFF">
                         <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
@@ -16,7 +29,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="tooltip">HomePage</span>
             </li>
         </a>
-        <a href="#mapaOpenlayers">
+        <a href="<?= $isAdminSection ? '../pages/main.php#mapaOpenlayers' : '#mapaOpenlayers' ?>">
             <li class="<?= ($currentPage === 'mapa.php') ? 'active' : '' ?>">
                 <i>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#FFFFFF">
@@ -26,7 +39,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="tooltip">Map</span>
             </li>
         </a>
-        <a href="../pages/routing.html">
+        <a href="<?= $isAdminSection ? '../pages/routing.html' : '../pages/routing.html' ?>">
             <li class="<?= ($currentPage === 'routing.html') ? 'active' : '' ?>">
                 <i>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#FFFFFF">
@@ -36,7 +49,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="tooltip">Routing</span>
             </li>
         </a>
-        <a href="#aboutUs">
+        <a href="<?= $isAdminSection ? '../pages/main.php#aboutUs' : '#aboutUs' ?>">
             <li class="<?= ($currentPage === 'about_us.php') ? 'active' : '' ?>">
                 <i>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#FFFFFF">
@@ -46,7 +59,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="tooltip">About Us</span>
             </li>
         </a>
-        <a href="#contacts">
+        <a href="<?= $isAdminSection ? '../pages/main.php#contacts' : '#contacts' ?>">
             <li class="<?= ($currentPage === 'contact_us.php') ? 'active' : '' ?>">
                 <i>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#FFFFFF">
@@ -56,6 +69,20 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="tooltip">Contacts</span>
             </li>
         </a>
+
+        <?php if (!empty($_SESSION['authenticated']) && $_SESSION['authenticated'] === true): ?>
+        <!-- Seção Admin - Visível apenas quando logado como admin -->
+        <a href="<?= $isAdminSection ? 'dashboard.php' : '../admin/dashboard.php' ?>">
+            <li class="<?= ($currentPage === 'dashboard.php') ? 'active' : '' ?>">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#FFFFFF">
+                        <path d="M120-120v-560h160v560H120Zm280 0v-560h160v560H400Zm280 0v-560h160v560H680Zm40-600v-160h80v160h-80Zm-280 0v-160h80v160h-80Zm-280 0v-160h80v160h-80Z"/>
+                    </svg>
+                </i>
+                <span class="tooltip">Dashboard Admin</span>
+            </li>
+        </a>
+        <?php endif; ?>
     </ul>
 </nav>
 <script src="../js/sidebar.js"></script>

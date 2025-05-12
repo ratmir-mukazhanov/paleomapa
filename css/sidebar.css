@@ -1,3 +1,5 @@
+@import url('../css/cores.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -9,13 +11,13 @@
 
 body {
     background-color: var(--background-color);
-    color: var(--text-light);
+    color: var(--text-white);
     margin: 0;
     padding: 0;
 }
 
 a {
-    color: var(--text-light);
+    color: var(--text-white);
     text-decoration: none;
 }
 
@@ -50,7 +52,7 @@ a {
     justify-content: center;
     align-items: center;
     transition: var(--transition);
-    color: var(--text-light);
+    color: var(--text-white);
 }
 
 .sidebar-navigation ul li i svg {
@@ -62,7 +64,7 @@ a {
     display: inline-block;
     position: absolute;
     background-color: var(--tooltip-background-color);
-    color: var(--text-light);
+    color: var(--text-white);
     padding: 8px 15px;
     border-radius: var(--border-radius);
     margin-top: -26px;

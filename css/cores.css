@@ -8,6 +8,9 @@
     --primary-dark: #3a2e22;            /* Marrom ainda mais escuro */
     --accent-color: #c2906d;            /* Destaque alaranjado */
     --highlight: #e8d2b4;               /* Destaque claro */
+    --success-color: #4caf50;          /* Verde para sucesso */
+    --warning-color: #ff9800;          /* Laranja para aviso */
+    --error-color: #f44336;            /* Vermelho para erro */
   
     /* Fundos e Texto */
     --panel-bg: rgba(59, 45, 30, 0.85);

@@ -1,58 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/cores.css">
-  <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="../css/about_us.css">
-  <link rel="stylesheet" href="../css/contact_us.css">
-  
-  <style>
-      .map {
-        width: 100%;
-        height: 400px;
-      }
-      
-      .fullscreen:-webkit-full-screen {
-        height: 100%;
-        margin: 0;
-      }
-
-      .fullscreen:fullscreen {
-        height: 100%;
-      }
-
-      .fullscreen {
-        margin-bottom: 10px;
-        width: 100%;
-        height: 400px;
-      }
-
-      .map {
-        width: 80%;
-        height: 100%;
-        float: left;
-      }
-    </style>
-    
-
-  
-  <title>Paleomapa - HomePage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.4.0/ol.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cores.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/about_us.css">
+    <link rel="stylesheet" href="../css/contact_us.css">
+    <title>Paleomapa - HomePage</title>
 </head>
-
-<b>
-  <?php 
-    require_once "../components/header.php";
-    require_once "../components/sidebar.php";
-  ?>
+<body>
+<?php
+require_once "../components/header.php";
+require_once "../components/sidebar.php";
+?>
     <div id="homepage">
     <h1 class="page-title">Últimas Descobertas Paleontológicas</h1>
     <div class="content-wrapper">
@@ -325,16 +292,26 @@
         </div>
     </div>
 </div>
-        </div>  
-    </div> 
-
+        </div>
+    </div>
     <div id="contacts">
         <div class="main-content">
             <h1 class="section-title">Contacto</h1>
                 <div class="contact-container">
                     <div class="contact-form">
                         <h2 class="section-title">Tem dúvidas? Deixe a sua Mensagem</h2>
-                        <form id="contactForm" action="process_contact.php" method="POST">
+                        <?php
+                            // Verificar se existe mensagem de feedback para exibir
+                            if (isset($_SESSION['contact_msg'])) {
+                                $alertClass = ($_SESSION['contact_status'] === 'success') ? 'alert-success' : 'alert-error';
+                                echo '<div class="alert ' . $alertClass . '">' . $_SESSION['contact_msg'] . '</div>';
+                                
+                                // Limpar as mensagens da sessão após exibição
+                                unset($_SESSION['contact_msg']);
+                                unset($_SESSION['contact_status']);
+                            }
+                            ?>
+                        <form id="contactForm" action="../scripts/process_contact.php" method="POST">
                             <div class="form-group">
                                 <label for="name">O Teu Nome:</label>
                                 <input type="text" id="name" name="name" class="form-control" required>
@@ -411,11 +388,11 @@
                 </div>
     </div>
 
-    <script script src="../js/index.js"></script>
+    <script src="../js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
     <script src="../js/mapa.js"></script>
     <script src="../js/about_us.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function() {
         $('.faq-question').click(function() {
