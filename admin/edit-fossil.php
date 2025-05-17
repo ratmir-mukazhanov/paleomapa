@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $species = trim($_POST['species'] ?? '');
     $latitude = trim($_POST['latitude'] ?? '');
     $longitude = trim($_POST['longitude'] ?? '');
+    $source = trim($_POST['source'] ?? '');
 
     // Validação básica
     if (empty($title)) {
@@ -53,16 +54,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!is_numeric($latitude) || !is_numeric($longitude)) {
         $errorMsg = "Latitude e longitude devem ser valores numéricos válidos.";
     } else {
-        // Atualizar o fóssil no banco de dados
+        // Atualizar o fóssil no banco de dados com o campo source
         $result = $dashboardService->updateFossil($fossilId, $title, $discoveredBy, $dateDiscovered,
             $kingdom, $phylum, $class, $order,
             $family, $genus, $species,
-            $latitude, $longitude);
+            $latitude, $longitude, $source);
 
         if ($result) {
             $successMsg = "Fóssil atualizado com sucesso.";
             // Recarregar os dados após a atualização
             $fossilData = $dashboardService->getFossilById($fossilId);
+
+            // Redirecionar para a lista de fósseis após atualização bem-sucedida
+            header("Location: fossils-management.php?success=fossil_updated");
+            exit();
         } else {
             $errorMsg = "Erro ao atualizar o fóssil. Por favor, tente novamente.";
         }
@@ -300,6 +305,15 @@ require_once "../components/sidebar.php";
                     <div class="form-group">
                         <label for="species">Espécie</label>
                         <input type="text" id="species" name="species" class="form-control" value="<?php echo htmlspecialchars($fossilData['species'] ?? ''); ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="source">Fonte</label>
+                        <select id="source" name="source" class="form-control">
+                            <option value="">Selecione uma fonte</option>
+                            <option value="Paleomapa" <?php echo (isset($fossilData['source']) && $fossilData['source'] == 'Paleomapa') ? 'selected' : ''; ?>>Paleomapa</option>
+                            <option value="UA" <?php echo (isset($fossilData['source']) && $fossilData['source'] == 'UA') ? 'selected' : ''; ?>>UA</option>
+                        </select>
                     </div>
 
                     <div class="coordinates-section">

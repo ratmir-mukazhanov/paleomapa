@@ -420,7 +420,8 @@ require_once "../components/sidebar.php";
                                         data-order="<?php echo htmlspecialchars($fossil['order']); ?>"
                                         data-family="<?php echo htmlspecialchars($fossil['family']); ?>"
                                         data-genus="<?php echo htmlspecialchars($fossil['genus']); ?>"
-                                        data-species="<?php echo htmlspecialchars($fossil['species']); ?>">
+                                        data-species="<?php echo htmlspecialchars($fossil['species']); ?>"
+                                        data-source="<?php echo htmlspecialchars($fossil['source'] ?? ''); ?>">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="action-btn" onclick="location.href='edit-fossil.php?id=<?php echo $fossil['id']; ?>';">
@@ -530,11 +531,15 @@ require_once "../components/sidebar.php";
                     <label>Espécie</label>
                     <div class="modal-field-value" id="modalSpecies"></div>
                 </div>
+                <div class="modal-field">
+                    <label>Fonte</label>
+                    <div class="modal-field-value" id="modalSource"></div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
             <button class="action-btn close-modal">
-                <i class="fas fa-times-circle"></i> Fechar
+                <i class="fas fa-times-circle"></i>
             </button>
         </div>
     </div>
@@ -543,7 +548,6 @@ require_once "../components/sidebar.php";
 <!-- Confirmação de exclusão -->
 <div id="deleteModal" class="fossil-modal">
     <div class="modal-content" style="max-width: 500px;">
-        <span class="close-modal" title="Fechar">&times;</span>
         <div class="modal-header" style="border-bottom: 2px solid #ffcdd2; margin-bottom: 20px; padding-bottom: 15px;">
             <i class="fas fa-trash-alt fa-lg" style="color: var(--error-color); font-size: 24px;"></i>
             <h3 style="color: var(--error-color);">Confirmar Exclusão</h3>
@@ -559,7 +563,7 @@ require_once "../components/sidebar.php";
         </div>
         <div class="modal-footer" style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; padding-top: 20px; border-top: 1px solid #f1f1f1;">
             <button class="action-btn" onclick="$('#deleteModal').hide();" style="background-color: #f5f5f5; color: #333; border: 1px solid #ddd; padding: 12px 18px;">
-                <i class="fas fa-times"></i> Cancelar
+                Cancelar
             </button>
             <form id="deleteForm" method="post" action="delete-fossil.php">
                 <input type="hidden" id="deleteId" name="fossil_id">
@@ -587,6 +591,7 @@ require_once "../components/sidebar.php";
             $('#modalFamily').text(fossil.family || 'N/A');
             $('#modalGenus').text(fossil.genus || 'N/A');
             $('#modalSpecies').text(fossil.species || 'N/A');
+            $('#modalSource').text(fossil.source || 'N/A');
 
             $('#fossilModal').css('display', 'flex');
         });

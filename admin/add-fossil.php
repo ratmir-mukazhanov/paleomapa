@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $species = isset($_POST['species']) ? trim($_POST['species']) : null;
     $latitude = isset($_POST['latitude']) ? trim($_POST['latitude']) : '';
     $longitude = isset($_POST['longitude']) ? trim($_POST['longitude']) : '';
+    $source = isset($_POST['source']) ? trim($_POST['source']) : null;
 
     // Validação básica - apenas coordenadas são obrigatórias
     if (empty($latitude) || empty($longitude)) {
@@ -36,18 +37,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!is_numeric($latitude) || !is_numeric($longitude)) {
         $errorMsg = "Latitude e longitude devem ser valores numéricos válidos.";
     } else {
-        // Adicionar o fóssil ao banco de dados
+        // Adicionar o fóssil ao banco de dados com o campo source
         $result = $dashboardService->addFossil($title, $discoveredBy, $dateDiscovered,
             $kingdom, $phylum, $class, $order,
             $family, $genus, $species,
-            $latitude, $longitude);
+            $latitude, $longitude, $source);
 
         if ($result) {
-            // Redirecionar para a página de gestão de fósseis com mensagem de sucesso
-            header("Location: fossils-management.php?success=1");
+            $successMsg = "Fóssil adicionado com sucesso!";
+            // Limpar os campos após sucesso
+            $title = $discoveredBy = $dateDiscovered = $kingdom = $phylum = '';
+            $class = $order = $family = $genus = $species = $latitude = $longitude = $source = '';
+            header("Location: fossils-management.php?success=fossil_added");
             exit();
         } else {
-            $errorMsg = "Erro ao adicionar o fóssil. Por favor, tente novamente.";
+            $errorMsg = "Erro ao adicionar fóssil. Por favor, tente novamente.";
         }
     }
 }
@@ -276,6 +280,15 @@ require_once "../components/sidebar.php";
                             <label for="species">Espécie</label>
                             <input type="text" id="species" name="species" class="form-control">
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="source">Fonte</label>
+                        <select id="source" name="source" class="form-control">
+                            <option value="">Selecione uma fonte</option>
+                            <option value="Paleomapa">Paleomapa</option>
+                            <option value="UA">UA</option>
+                        </select>
                     </div>
 
                     <div class="coordinates-section">

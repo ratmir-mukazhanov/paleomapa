@@ -233,11 +233,11 @@ class DashboardService {
         try {
             $offset = ($page - 1) * $limit;
 
-            // Query para buscar apenas os fósseis da página atual
-            $query = "SELECT id, title, discovered_by, date_discovered, kingdom, phylum, class, \"order\", family, genus, species 
-                 FROM findings 
-                 ORDER BY id DESC 
-                 LIMIT $limit OFFSET $offset";
+            // Query para buscar apenas os fósseis da página atual incluindo o campo source
+            $query = "SELECT id, title, discovered_by, date_discovered, kingdom, phylum, class, \"order\", family, genus, species, source 
+             FROM findings
+             ORDER BY id DESC
+             LIMIT $limit OFFSET $offset";
 
             $result = pg_query($this->db_connection, $query);
 
@@ -276,7 +276,7 @@ class DashboardService {
     // Método para adicionar um novo fóssil
     public function addFossil($title, $discoveredBy, $dateDiscovered, $kingdom,
                               $phylum, $class, $order, $family, $genus, $species,
-                              $latitude, $longitude) {
+                              $latitude, $longitude, $source = null) {
         try {
             // Primeiro, obter o próximo ID disponível
             $idQuery = "SELECT COALESCE(MAX(id) + 1, 1) AS next_id FROM findings";
@@ -292,10 +292,10 @@ class DashboardService {
             $geomQuery = "ST_SetSRID(ST_MakePoint($1, $2), 4326)";
 
             $query = "INSERT INTO findings (id, title, discovered_by, date_discovered,
-                              kingdom, phylum, class, \"order\",
-                              family, genus, species, geom, created_at)
+                          kingdom, phylum, class, \"order\",
+                          family, genus, species, geom, created_at, source)
          VALUES ($3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
-                 " . $geomQuery . ", CURRENT_TIMESTAMP)";
+                 " . $geomQuery . ", CURRENT_TIMESTAMP, $14)";
 
             $params = array(
                 $longitude, $latitude,  // Parâmetros para a geometria (1, 2)
@@ -303,7 +303,8 @@ class DashboardService {
                 $title, $discoveredBy, // (4, 5)
                 !empty($dateDiscovered) ? $dateDiscovered : null, // (6)
                 $kingdom, $phylum, $class, $order, // (7, 8, 9, 10)
-                $family, $genus, $species // (11, 12, 13)
+                $family, $genus, $species, // (11, 12, 13)
+                $source // (14)
             );
 
             $result = pg_query_params($this->db_connection, $query, $params);
@@ -322,13 +323,14 @@ class DashboardService {
     // Método para obter um fóssil por ID
     public function getFossilById($id) {
         try {
-            // Consulta para buscar o fóssil e suas coordenadas
+            // Consulta para buscar o fóssil e suas coordenadas incluindo o campo source
             $query = "SELECT 
-                    f.*,
-                    ST_X(geom::geometry) as longitude,
-                    ST_Y(geom::geometry) as latitude
-                FROM findings f 
-                WHERE id = $1";
+                  id, title, discovered_by, date_discovered, kingdom, 
+                  phylum, class, \"order\", family, genus, species, source,
+                  ST_X(ST_Transform(geom, 4326)) AS longitude,
+                  ST_Y(ST_Transform(geom, 4326)) AS latitude
+                  FROM findings 
+                  WHERE id = $1";
 
             $result = pg_query_params($this->db_connection, $query, [$id]);
 
@@ -346,32 +348,34 @@ class DashboardService {
     // Método para atualizar um fóssil existente
     public function updateFossil($id, $title, $discoveredBy, $dateDiscovered, $kingdom,
                                  $phylum, $class, $order, $family, $genus, $species,
-                                 $latitude, $longitude) {
+                                 $latitude, $longitude, $source = null) {
         try {
-            // Criar objeto de geometria ponto a partir das coordenadas atualizadas
+            // Criar objeto de geometria ponto a partir das coordenadas
             $geomQuery = "ST_SetSRID(ST_MakePoint($1, $2), 4326)";
 
-            $query = "UPDATE findings 
-                  SET title = $3, 
-                      discovered_by = $4, 
-                      date_discovered = $5, 
-                      kingdom = $6, 
-                      phylum = $7, 
-                      class = $8, 
-                      \"order\" = $9, 
-                      family = $10, 
-                      genus = $11, 
-                      species = $12, 
-                      geom = " . $geomQuery . "
-                  WHERE id = $13";
+            $query = "UPDATE findings SET 
+                  title = $3, 
+                  discovered_by = $4, 
+                  date_discovered = $5, 
+                  kingdom = $6, 
+                  phylum = $7, 
+                  class = $8, 
+                  \"order\" = $9, 
+                  family = $10, 
+                  genus = $11, 
+                  species = $12,
+                  source = $13,
+                  geom = " . $geomQuery . "
+                  WHERE id = $14";
 
             $params = array(
-                $longitude, $latitude,  // Parâmetros para a geometria
-                $title, $discoveredBy,
-                !empty($dateDiscovered) ? $dateDiscovered : null,
-                $kingdom, $phylum, $class, $order,
-                $family, $genus, $species,
-                $id  // ID do fóssil a ser atualizado
+                $longitude, $latitude,  // Parâmetros para a geometria (1, 2)
+                $title, $discoveredBy,  // (3, 4)
+                !empty($dateDiscovered) ? $dateDiscovered : null, // (5)
+                $kingdom, $phylum, $class, $order,  // (6, 7, 8, 9)
+                $family, $genus, $species,  // (10, 11, 12)
+                $source, // (13)
+                $id  // (14)
             );
 
             $result = pg_query_params($this->db_connection, $query, $params);
