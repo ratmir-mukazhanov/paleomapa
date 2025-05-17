@@ -93,7 +93,7 @@ $temporalContactData = $dashboardService->getTemporalContactData();
             <div class="section">
                 <h2><i class="fas fa-database"></i> Gestão de Dados</h2>
                 <div class="action-buttons">
-                    <a href="#" class="admin-btn">Dados Paleontológicos</a>
+                    <a href="fossils-management.php" class="admin-btn">Dados Paleontológicos</a>
                 </div>
             </div>
             <div class="section">

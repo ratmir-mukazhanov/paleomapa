@@ -228,6 +228,188 @@ class DashboardService {
         }
     }
 
+    // Método para obter todos os fósseis
+    public function getAllFossils($page = 1, $limit = 20) {
+        try {
+            $offset = ($page - 1) * $limit;
+
+            // Query para buscar apenas os fósseis da página atual
+            $query = "SELECT id, title, discovered_by, date_discovered, kingdom, phylum, class, \"order\", family, genus, species 
+                 FROM findings 
+                 ORDER BY id DESC 
+                 LIMIT $limit OFFSET $offset";
+
+            $result = pg_query($this->db_connection, $query);
+
+            if (!$result) {
+                throw new Exception('Erro na execução da query: ' . pg_last_error($this->db_connection));
+            }
+
+            $fossils = [];
+            while ($row = pg_fetch_assoc($result)) {
+                $fossils[] = $row;
+            }
+            return $fossils;
+        } catch (Exception $e) {
+            error_log("Erro ao buscar fósseis: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function countFossils() {
+        try {
+            $query = "SELECT COUNT(*) as total FROM findings";
+            $result = pg_query($this->db_connection, $query);
+
+            if (!$result) {
+                throw new Exception('Erro na contagem de fósseis: ' . pg_last_error($this->db_connection));
+            }
+
+            $row = pg_fetch_assoc($result);
+            return (int)$row['total'];
+        } catch (Exception $e) {
+            error_log("Erro ao contar fósseis: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    // Método para adicionar um novo fóssil
+    public function addFossil($title, $discoveredBy, $dateDiscovered, $kingdom,
+                              $phylum, $class, $order, $family, $genus, $species,
+                              $latitude, $longitude) {
+        try {
+            // Primeiro, obter o próximo ID disponível
+            $idQuery = "SELECT COALESCE(MAX(id) + 1, 1) AS next_id FROM findings";
+            $idResult = pg_query($this->db_connection, $idQuery);
+            if (!$idResult) {
+                throw new Exception('Erro ao obter próximo ID: ' . pg_last_error($this->db_connection));
+            }
+
+            $row = pg_fetch_assoc($idResult);
+            $nextId = $row['next_id'];
+
+            // Criar objeto de geometria ponto a partir das coordenadas
+            $geomQuery = "ST_SetSRID(ST_MakePoint($1, $2), 4326)";
+
+            $query = "INSERT INTO findings (id, title, discovered_by, date_discovered,
+                              kingdom, phylum, class, \"order\",
+                              family, genus, species, geom, created_at)
+         VALUES ($3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13,
+                 " . $geomQuery . ", CURRENT_TIMESTAMP)";
+
+            $params = array(
+                $longitude, $latitude,  // Parâmetros para a geometria (1, 2)
+                $nextId, // ID gerado manualmente (3)
+                $title, $discoveredBy, // (4, 5)
+                !empty($dateDiscovered) ? $dateDiscovered : null, // (6)
+                $kingdom, $phylum, $class, $order, // (7, 8, 9, 10)
+                $family, $genus, $species // (11, 12, 13)
+            );
+
+            $result = pg_query_params($this->db_connection, $query, $params);
+
+            if (!$result) {
+                throw new Exception('Erro na execução da query: ' . pg_last_error($this->db_connection));
+            }
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Erro ao adicionar fóssil: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Método para obter um fóssil por ID
+    public function getFossilById($id) {
+        try {
+            // Consulta para buscar o fóssil e suas coordenadas
+            $query = "SELECT 
+                    f.*,
+                    ST_X(geom::geometry) as longitude,
+                    ST_Y(geom::geometry) as latitude
+                FROM findings f 
+                WHERE id = $1";
+
+            $result = pg_query_params($this->db_connection, $query, [$id]);
+
+            if (!$result) {
+                throw new Exception('Erro na execução da query: ' . pg_last_error($this->db_connection));
+            }
+
+            return pg_fetch_assoc($result);
+        } catch (Exception $e) {
+            error_log("Erro ao buscar fóssil por ID: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    // Método para atualizar um fóssil existente
+    public function updateFossil($id, $title, $discoveredBy, $dateDiscovered, $kingdom,
+                                 $phylum, $class, $order, $family, $genus, $species,
+                                 $latitude, $longitude) {
+        try {
+            // Criar objeto de geometria ponto a partir das coordenadas atualizadas
+            $geomQuery = "ST_SetSRID(ST_MakePoint($1, $2), 4326)";
+
+            $query = "UPDATE findings 
+                  SET title = $3, 
+                      discovered_by = $4, 
+                      date_discovered = $5, 
+                      kingdom = $6, 
+                      phylum = $7, 
+                      class = $8, 
+                      \"order\" = $9, 
+                      family = $10, 
+                      genus = $11, 
+                      species = $12, 
+                      geom = " . $geomQuery . "
+                  WHERE id = $13";
+
+            $params = array(
+                $longitude, $latitude,  // Parâmetros para a geometria
+                $title, $discoveredBy,
+                !empty($dateDiscovered) ? $dateDiscovered : null,
+                $kingdom, $phylum, $class, $order,
+                $family, $genus, $species,
+                $id  // ID do fóssil a ser atualizado
+            );
+
+            $result = pg_query_params($this->db_connection, $query, $params);
+
+            if (!$result) {
+                throw new Exception('Erro na execução da query: ' . pg_last_error($this->db_connection));
+            }
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Erro ao atualizar fóssil: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Método para excluir um fóssil por ID
+    public function deleteFossil($id) {
+        try {
+            $query = "DELETE FROM findings WHERE id = $1";
+            $result = pg_query_params($this->db_connection, $query, [$id]);
+
+            if (!$result) {
+                throw new Exception('Erro ao excluir fóssil: ' . pg_last_error($this->db_connection));
+            }
+
+            // Verificar se alguma linha foi afetada
+            $rowsAffected = pg_affected_rows($result);
+            if ($rowsAffected === 0) {
+                throw new Exception('Nenhum fóssil encontrado com o ID fornecido.');
+            }
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Erro ao excluir fóssil: " . $e->getMessage());
+            return false;
+        }
+    }
+
 
     /**
      * Fecha a conexão com o banco de dados
