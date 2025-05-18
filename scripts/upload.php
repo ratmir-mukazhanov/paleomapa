@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -8,25 +8,6 @@ $dsn = "pgsql:host={$config['host']};dbname={$config['dbname']}";
 $pdo = new PDO($dsn, $config['user'], $config['pass']);
 
 try {
-    // Создание таблицы, если её нет
-    $pdo->exec("
-        CREATE TABLE IF NOT EXISTS findings (
-            id BIGINT PRIMARY KEY,
-            title TEXT,
-            latitude NUMERIC,
-            longitude NUMERIC,
-            discovered_by TEXT,
-            date_discovered DATE,
-            kingdom TEXT,
-            phylum TEXT,
-            class TEXT,
-            \"order\" TEXT,
-            family TEXT,
-            genus TEXT,
-            species TEXT
-        );
-    ");
-
     if (isset($_FILES['excel_file']['tmp_name'])) {
         $spreadsheet = IOFactory::load($_FILES['excel_file']['tmp_name']);
         $sheet = $spreadsheet->getActiveSheet();
@@ -37,12 +18,13 @@ try {
         }
 
         $headers = array_map('trim', $rows[0]);
+        $dataAtual = date('Y-m-d');
 
         for ($i = 1; $i < count($rows); $i++) {
             $assocRow = array_combine($headers, $rows[$i]);
 
             if ($assocRow === false) {
-                continue; // пропустить строку, если число колонок не совпадает
+                continue;
             }
 
             $id = isset($assocRow['gbifID']) && is_numeric($assocRow['gbifID']) ? (int)$assocRow['gbifID'] : null;
@@ -61,7 +43,14 @@ try {
             $latitude = isset($assocRow['decimalLatitude']) && is_numeric($assocRow['decimalLatitude']) ? floatval($assocRow['decimalLatitude']) : null;
             $longitude = isset($assocRow['decimalLongitude']) && is_numeric($assocRow['decimalLongitude']) ? floatval($assocRow['decimalLongitude']) : null;
 
-            // Обработка даты
+            // Criando valor para geom a partir de latitude e longitude
+            $geom = null;
+            if ($latitude !== null && $longitude !== null) {
+                // Usando o formato WKT (Well-Known Text) para criar a geometria
+                $geom = "POINT($longitude $latitude)";
+            }
+
+            // Processamento da data de descoberta
             $date_discovered = null;
             if (!empty($assocRow['eventDate'])) {
                 $rawDate = trim($assocRow['eventDate']);
@@ -81,12 +70,37 @@ try {
                 }
             }
 
+            // Processar o campo created_at se existir no Excel
+            $created_at = $dataAtual;
+            if (!empty($assocRow['created_at'])) {
+                $rawCreatedAt = trim($assocRow['created_at']);
+                $formats = ['Y-m-d', 'd/m/Y', 'Y-m-d\TH:i:s', 'm/d/Y'];
+                foreach ($formats as $format) {
+                    $dt = DateTime::createFromFormat($format, $rawCreatedAt);
+                    if ($dt !== false) {
+                        $created_at = $dt->format('Y-m-d');
+                        break;
+                    }
+                }
+                if ($created_at === $dataAtual) {
+                    $timestamp = strtotime($rawCreatedAt);
+                    if ($timestamp) {
+                        $created_at = date('Y-m-d', $timestamp);
+                    }
+                }
+            }
+
+            $source = $assocRow['source'] ?? 'Paleomapa';
+
             if ($id !== null) {
+                // Modificando a query para incluir o campo geom usando ST_GeomFromText
                 $stmt = $pdo->prepare("
                     INSERT INTO findings (
                         id, title, latitude, longitude, discovered_by, date_discovered,
-                        kingdom, phylum, class, \"order\", family, genus, species
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        kingdom, phylum, class, \"order\", family, genus, species,
+                        created_at, source, geom
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                      ST_SetSRID(ST_GeomFromText(?), 4326))
                     ON CONFLICT (id) DO UPDATE SET
                         title = EXCLUDED.title,
                         latitude = EXCLUDED.latitude,
@@ -99,11 +113,14 @@ try {
                         \"order\" = EXCLUDED.\"order\",
                         family = EXCLUDED.family,
                         genus = EXCLUDED.genus,
-                        species = EXCLUDED.species
+                        species = EXCLUDED.species,
+                        source = EXCLUDED.source,
+                        geom = EXCLUDED.geom
                 ");
                 $stmt->execute([
                     $id, $title, $latitude, $longitude, $discovered_by, $date_discovered,
-                    $kingdom, $phylum, $class, $order, $family, $genus, $species
+                    $kingdom, $phylum, $class, $order, $family, $genus, $species,
+                    $created_at, $source, $geom
                 ]);
             }
         }
