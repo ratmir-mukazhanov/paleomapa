@@ -105,7 +105,30 @@ require_once "../components/sidebar.php";
                         
                         <label for="minDistanceInput">Distância Mínima:</label>
                         <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
-                        <span id="minDistanceValue">5</span>
+                        <span id="minDistanceValue">5</span><br><br>
+
+                        <label for="filterByColumn">Filtrar por:</label><br><br>
+                        
+                        <label for="source">Source</label>
+                        <select id="source">
+                        </select><br><br>
+
+                        <label for="family">Family</label>
+                        <select id="family">
+                        </select><br><br>
+
+                        <label for="order">Order</label>
+                        <select id="order">
+                        </select><br><br>
+
+                        <label for="genus">Genus</label>
+                        <select id="genus">
+                        </select><br><br>
+
+                        <label for="species">Species</label>
+                        <select id="species">
+                        </select><br><br>
+
                     </div>
                 </div>
             </div>
@@ -388,7 +411,9 @@ require_once "../components/sidebar.php";
                 </div>
     </div>
 
-    <script src="../js/index.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="module" src="../js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.4.0/dist/ol.js"></script>
     <script src="../js/mapa.js"></script>
     <script src="../js/about_us.js"></script>
