@@ -107,27 +107,27 @@ require_once "../components/sidebar.php";
                         <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
                         <span id="minDistanceValue">5</span><br><br>
 
-                        <label for="filterByColumn">Filtrar por:</label><br><br>
+                        <label>Filtrar por:</label><br><br>
                         
-                        <label for="source">Source</label>
-                        <select id="source">
-                        </select><br><br>
+                        <label>Source</label>
+                        <input type="text" id="searchInputSource" placeholder="A pesquisar sem filtro">
+                            <ul id="dropdownListSource" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
 
-                        <label for="family">Family</label>
-                        <select id="family">
-                        </select><br><br>
+                        <label>Family</label>
+                        <input type="text" id="searchInputFamily" placeholder="A pesquisar sem filtro">
+                            <ul id="dropdownListFamily" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
 
-                        <label for="order">Order</label>
-                        <select id="order">
-                        </select><br><br>
+                        <label>Order</label>
+                        <input type="text" id="searchInputOrder" placeholder="A pesquisar sem filtro">
+                            <ul id="dropdownListOrder" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
 
-                        <label for="genus">Genus</label>
-                        <select id="genus">
-                        </select><br><br>
+                        <label>Genus</label>
+                        <input type="text" id="searchInputGenus" placeholder="A pesquisar sem filtro">
+                            <ul id="dropdownListGenus" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
 
-                        <label for="species">Species</label>
-                        <select id="species">
-                        </select><br><br>
+                        <label>Species</label>
+                        <input type="text" id="searchInputSpecies" placeholder="A pesquisar sem filtro">
+                            <ul id="dropdownListSpecies" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul>
 
                     </div>
                 </div>

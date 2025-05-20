@@ -380,26 +380,25 @@ $.ajax({
 
     response = JSON.parse(response);
 
-    var html = "";
+    const items = [];
+    const searchInput = document.getElementById("searchInputSource");
+    const dropdownList = document.getElementById("dropdownListSource");
+
+    dropdownSearch(items, searchInput, dropdownList);
 
     if (response.length) {
 
       $.each(response, function(key, value) {
 
-        html += "<option value='" + value.nome + "'>" + value.nome + "</option>";
+        items.push(value.source);
 
       });
 
     } else {
 
-      html += '<div class="alert alert-warning">';
-      html += 'No source found!';
-      html += '</div>';
+      items.push("Sem informação");
 
     }
-
-    $("#source").html(html);
-
   }
 });
 
@@ -410,26 +409,25 @@ $.ajax({
 
     response = JSON.parse(response);
 
-    var html = "";
+    const items = [];
+    const searchInput = document.getElementById("searchInputFamily");
+    const dropdownList = document.getElementById("dropdownListFamily");
+
+    dropdownSearch(items, searchInput, dropdownList);
 
     if (response.length) {
 
       $.each(response, function(key, value) {
 
-        html += "<option value='" + value.nome + "'>" + value.nome + "</option>";
+        items.push(value.family);
 
       });
 
     } else {
 
-      html += '<div class="alert alert-warning">';
-      html += 'No family found!';
-      html += '</div>';
+      items.push("Sem informação");
 
     }
-
-    $("#family").html(html);
-
   }
 });
 
@@ -440,26 +438,25 @@ $.ajax({
 
     response = JSON.parse(response);
 
-    var html = "";
+    const items = [];
+    const searchInput = document.getElementById("searchInputOrder");
+    const dropdownList = document.getElementById("dropdownListOrder");
+
+    dropdownSearch(items, searchInput, dropdownList);
 
     if (response.length) {
 
       $.each(response, function(key, value) {
 
-        html += "<option value='" + value.nome + "'>" + value.nome + "</option>";
+        items.push(value.order);
 
       });
 
     } else {
 
-      html += '<div class="alert alert-warning">';
-      html += 'No order found!';
-      html += '</div>';
+      items.push("Sem informação");
 
     }
-
-    $("#order").html(html);
-
   }
 });
 
@@ -470,26 +467,25 @@ $.ajax({
 
     response = JSON.parse(response);
 
-    var html = "";
+    const items = [];
+    const searchInput = document.getElementById("searchInputGenus");
+    const dropdownList = document.getElementById("dropdownListGenus");
+
+    dropdownSearch(items, searchInput, dropdownList);
 
     if (response.length) {
 
       $.each(response, function(key, value) {
 
-        html += "<option value='" + value.nome + "'>" + value.nome + "</option>";
+        items.push(value.genus);
 
       });
 
     } else {
 
-      html += '<div class="alert alert-warning">';
-      html += 'No genus found!';
-      html += '</div>';
+      items.push("Sem informação");
 
     }
-
-    $("#genus").html(html);
-
   }
 });
 
@@ -500,25 +496,64 @@ $.ajax({
 
     response = JSON.parse(response);
 
-    var html = "";
+    const items = [];
+    const searchInput = document.getElementById("searchInputSpecies");
+    const dropdownList = document.getElementById("dropdownListSpecies");
+
+    dropdownSearch(items, searchInput, dropdownList);
 
     if (response.length) {
 
       $.each(response, function(key, value) {
 
-        html += "<option value='" + value.nome + "'>" + value.nome + "</option>";
+        items.push(value.species);
 
       });
 
     } else {
 
-      html += '<div class="alert alert-warning">';
-      html += 'No species found!';
-      html += '</div>';
+      items.push("Sem informação");
 
     }
-
-    $("#species").html(html);
-
   }
 });
+
+function dropdownSearch(items, searchInput, dropdownList) {
+
+  function selectItem(value) {
+    searchInput.value = value;
+    dropdownList.style.display = "none";
+  }
+
+  function renderDropdown(filteredItems) {
+    dropdownList.innerHTML = "";
+    if (filteredItems.length > 0) {
+      dropdownList.style.display = "block";
+      filteredItems.forEach(item => {
+        let li = document.createElement("li");
+        li.innerText = item;
+        li.style.cursor = "pointer";
+        li.onclick = () => selectItem(item);
+        dropdownList.appendChild(li);
+      });
+    } else {
+      dropdownList.style.display = "none";
+    }
+  }
+
+  searchInput.addEventListener("focus", () => {
+    renderDropdown(items);
+  });
+
+  searchInput.addEventListener("input", () => {
+    const filtered = items.filter(item => item.toLowerCase().includes(searchInput.value.toLowerCase()));
+    renderDropdown(filtered);
+  });
+
+  document.addEventListener("click", function(e) {
+    if (!searchInput.contains(e.target) && !dropdownList.contains(e.target)) {
+      dropdownList.style.display = "none";
+    }
+  });
+
+}

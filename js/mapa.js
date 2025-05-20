@@ -20,16 +20,52 @@ topo: new ol.layer.Tile({
 })
 };
 
-const vectorSource = new ol.source.Vector({
-url: '../scripts/data.php',
-format: new ol.format.GeoJSON()
+function getSearchParams() {
+    return {
+        source: $("#searchInputSource").val(),
+        family: $("#searchInputFamily").val(),
+        order: $("#searchInputOrder").val(),
+        genus: $("#searchInputGenus").val(),
+        species: $("#searchInputSpecies").val()
+    };
+}
+
+function buildUrl(params) {
+    const esc = encodeURIComponent;
+    return '../scripts/data.php?' +
+        'source=' + esc(params.source) +
+        '&family=' + esc(params.family) +
+        '&order=' + esc(params.order) +
+        '&genus=' + esc(params.genus) +
+        '&species=' + esc(params.species);
+}
+
+$("#searchInputSource, #searchInputFamily, #searchInputOrder, #searchInputGenus, #searchInputSpecies").on('input', updateVectorSource);
+
+$("#dropdownListSource, #dropdownListFamily, #dropdownListOrder, #dropdownListGenus, #dropdownListSpecies").on('click', 'li', updateVectorSource);
+
+
+
+function updateVectorSource() {
+    const params = getSearchParams();
+    const url = buildUrl(params);
+
+    vectorSource.setUrl(url);
+    vectorSource.refresh();
+
+}
+
+
+let vectorSource = new ol.source.Vector({
+    url: '../scripts/data.php',
+    format: new ol.format.GeoJSON()
 });
 
-const clusterSource = new ol.source.Cluster({
+let clusterSource = new ol.source.Cluster({
     distance: 10,
     minDistance: 5,
-    source: vectorSource,
-  });
+    source: vectorSource
+});
 
 /*
 const vectorLayer = new ol.layer.Vector({

@@ -4,6 +4,12 @@ $dsn = "pgsql:host={$config['host']};dbname={$config['dbname']}";
 $pdo = new PDO($dsn, $config['user'], $config['pass']);
 
 // Consulta somente os campos necessários e a geometria em formato GeoJSON
+$source = $_GET['source'] ?? '';
+$family = $_GET['family'] ?? '';
+$order = $_GET['order'] ?? '';
+$genus = $_GET['genus'] ?? '';
+$species = $_GET['species'] ?? '';
+
 $sql = "
     SELECT
       id,
@@ -14,6 +20,17 @@ $sql = "
     FROM findings
     WHERE geom IS NOT NULL
 ";
+
+if ($source !== '') {$sql .= " AND source ILIKE '%" . pg_escape_string($source) . "%'";}
+
+if ($family !== '') {$sql .= " AND family ILIKE '%" . pg_escape_string($family) . "%'";}
+
+if ($order !== '') {$sql .= " AND \"order\" ILIKE '%" . pg_escape_string($order) . "%'";}
+
+if ($genus !== '') {$sql .= " AND genus ILIKE '%" . pg_escape_string($genus) . "%'";}
+
+if ($species !== '') {$sql .= " AND species ILIKE '%" . pg_escape_string($species) . "%'";}
+
 
 $stmt = $pdo->query($sql);
 
