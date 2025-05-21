@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/about_us.css">
     <link rel="stylesheet" href="../css/contact_us.css">
-    <title>Paleomapa - HomePage</title>
+    <title>Paleomapa</title>
+    <link rel="icon" href="../img/fcporto.png" type="image/png">
 </head>
 <body>
 <?php
@@ -276,11 +277,17 @@ require_once "../components/sidebar.php";
                 <div class="tech-grid">
                     <div class="tech-item">
                         <i class="fas fa-map"></i>
-                        <span>Sistema Nacional de Informação Geográfica (SNIG)</span>
+                        <span>The Paleobiology Database</span>
+                        <a href="https://paleobiodb.org/" target="_blank" class="source-link" title="Visitar The Paleobiology Database">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                     <div class="tech-item">
                         <i class="fas fa-university"></i>
                         <span>Departamento de Geociências da Universidade de Aveiro</span>
+                        <a href="https://www.ua.pt/pt/geo/galeria" target="_blank" class="source-link" title="Visitar Galeria de Geociências - UA">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
                 
@@ -377,39 +384,39 @@ require_once "../components/sidebar.php";
                         </div>
                     </div>
                 </div>
-                
-                <div class="faq-section">
-                    <h2 class="section-title">Perguntas Frequentes</h2>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">O que é o Paleomapa?</div>
-                        <div class="faq-answer">
-                            O Paleomapa é uma plataforma interativa dedicada à visualização e gestão de dados paleontológicos e arqueológicos, permitindo explorar fósseis, sítios e pontos de interesse em mapas interativos com contextualização geográfica.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Quem pode utilizar o Paleomapa?</div>
-                        <div class="faq-answer">
-                            O Paleomapa pode ser utilizado por investigadores, professores, estudantes e entusiastas da paleontologia e arqueologia. A plataforma é pensada para fins educativos e científicos, com funcionalidades adaptadas a diferentes tipos de utilizadores.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Como posso contribuir com dados ou sugestões?</div>
-                        <div class="faq-answer">
-                            Aceitamos contribuições de investigadores, instituições e cidadãos interessados. É possível submeter novos registos de fósseis, sítios ou pontos de interesse através do nosso formulário de submissão. Todos os dados são revistos antes de serem publicados.
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Os dados apresentados são fiáveis?</div>
-                        <div class="faq-answer">
-                            Todos os dados no Paleomapa são validados por especialistas em paleontologia e arqueologia. A informação é atualizada regularmente com base em fontes científicas e contribuições credenciadas.
-                        </div>
+
+            <div class="faq-section">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">O que é o Paleomapa?</div>
+                    <div class="faq-answer">
+                        O Paleomapa é uma aplicação web que permite explorar e visualizar dados paleontológicos e arqueológicos em mapas interativos. Através da plataforma, é possível consultar fósseis, sítios históricos e pontos de interesse, com filtros geográficos e científicos para uma experiência educativa e envolvente.
                     </div>
                 </div>
-    </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Quem pode usar o Paleomapa?</div>
+                    <div class="faq-answer">
+                        O Paleomapa está disponível para qualquer pessoa interessada em paleontologia, arqueologia ou história natural. É especialmente útil para investigadores, docentes, estudantes e instituições educativas, mas também é acessível a curiosos e entusiastas.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Posso contribuir com informações ou dados?</div>
+                    <div class="faq-answer">
+                        Sim. Investigadores, instituições e cidadãos podem submeter novos dados sobre fósseis, sítios arqueológicos ou pontos de interesse. Existe um formulário próprio na plataforma para esse fim, e todas as submissões são revistas por uma equipa responsável antes de serem publicadas.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">A informação no Paleomapa é fiável?</div>
+                    <div class="faq-answer">
+                        Sim. Os dados apresentados são recolhidos a partir de fontes científicas, projetos académicos e bases de dados credenciadas. Todas as informações são validadas por especialistas da área e atualizadas de forma periódica para garantir a sua precisão.
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

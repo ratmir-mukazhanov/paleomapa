@@ -28,6 +28,72 @@ class DashboardService {
         }
     }
 
+    public function searchFossils($term, $page = 1, $limit = 20) {
+        try {
+            $offset = ($page - 1) * $limit;
+            $term = "%$term%";
+
+            $query = "SELECT id, title, discovered_by, date_discovered, kingdom, 
+                 phylum, class, \"order\", family, genus, species, source 
+                 FROM findings 
+                 WHERE title ILIKE $1 
+                 OR discovered_by ILIKE $1 
+                 OR kingdom ILIKE $1
+                 OR phylum ILIKE $1 
+                 OR class ILIKE $1 
+                 OR \"order\" ILIKE $1 
+                 OR family ILIKE $1 
+                 OR genus ILIKE $1 
+                 OR species ILIKE $1
+                 ORDER BY id DESC
+                 LIMIT $2 OFFSET $3";
+
+            $result = pg_query_params($this->db_connection, $query, array($term, $limit, $offset));
+
+            if (!$result) {
+                throw new Exception('Erro na execução da query: ' . pg_last_error($this->db_connection));
+            }
+
+            $fossils = [];
+            while ($row = pg_fetch_assoc($result)) {
+                $fossils[] = $row;
+            }
+            return $fossils;
+        } catch (Exception $e) {
+            error_log("Erro ao pesquisar fósseis: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function countSearchResults($term) {
+        try {
+            $term = "%$term%";
+
+            $query = "SELECT COUNT(*) as total FROM findings 
+                 WHERE title ILIKE $1 
+                 OR discovered_by ILIKE $1 
+                 OR kingdom ILIKE $1
+                 OR phylum ILIKE $1 
+                 OR class ILIKE $1 
+                 OR \"order\" ILIKE $1 
+                 OR family ILIKE $1 
+                 OR genus ILIKE $1 
+                 OR species ILIKE $1";
+
+            $result = pg_query_params($this->db_connection, $query, array($term));
+
+            if (!$result) {
+                throw new Exception('Erro na execução da query: ' . pg_last_error($this->db_connection));
+            }
+
+            $row = pg_fetch_assoc($result);
+            return (int)$row['total'];
+        } catch (Exception $e) {
+            error_log("Erro ao contar resultados da pesquisa: " . $e->getMessage());
+            return 0;
+        }
+    }
+
     /**
      * Obtém o número total de sítios arqueológicos
      */

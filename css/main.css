@@ -9,10 +9,50 @@ html, body, #mapa {
   color: #433831; /* Tom escuro para texto base */
 }
 
+.back-button {
+  position: absolute;
+  bottom: auto;
+  top: 20px;
+  left: 20px;
+  background: rgba(67, 56, 49, 0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 12px 18px;
+  color: var(--text-white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.back-button:hover {
+  background: var(--accent-color);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  color: white;
+  text-decoration: none;
+}
+
+.back-button i {
+  font-size: 16px;
+}
+
+.back-button span {
+  font-size: 16px;
+}
+
 /* Estilo comum para todos os painéis e toolboxes */
 #toolbox, #toolbox1, #container_slider, .layer-filters {
   position: absolute;
-  padding: 16px;
+  top: -10px;
   border-radius: var(--border-radius);
   background: var(--panel-bg);
   color: var(--text-white);
@@ -445,7 +485,7 @@ html, body, #mapa {
 /* Filtros do lado esquerdo */
 #left-filters {
   position: absolute;
-  top: 60px;
+  top: 150px;
   left: 15px;
   z-index: 100;
   width: 220px;
@@ -597,8 +637,8 @@ html, body, #mapa {
 }
 
 .ol-zoom {
-  top: 15px;
-  left: 15px;
+  top: 80px;
+  left: 20px;
 }
 
 /* Animações suaves para os elementos interativos */
@@ -606,6 +646,91 @@ button,
 input[type="radio"],
 input[type="checkbox"] {
   transition: var(--transition);
+}
+
+/* Spinner simplificado e mais elegante */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(67, 56, 49, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-in-out;
+  backdrop-filter: blur(5px);
+}
+
+.loading-spinner {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  perspective: 800px;
+}
+
+.spinner-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: var(--accent-color);
+  border-left-color: var(--accent-color);
+  animation: spin 1.2s linear infinite;
+  box-shadow: 0 0 20px rgba(194, 144, 109, 0.4);
+}
+
+.spinner-circle:nth-child(2) {
+  width: 75%;
+  height: 75%;
+  top: 12.5%;
+  left: 12.5%;
+  border-top-color: var(--primary-light);
+  border-left-color: var(--primary-light);
+  animation: spin 1.8s linear infinite reverse;
+}
+
+.spinner-circle:nth-child(3) {
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  border-top-color: var(--highlight);
+  border-left-color: var(--highlight);
+  animation: spin 2.4s linear infinite;
+}
+
+.loading-spinner p.loading-text {
+  position: absolute;
+  width: 250px;
+  text-align: center;
+  top: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  animation: fadeInOut 3s infinite ease-in-out;
+  margin: 0;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.8; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(-3px); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsividade para telas menores */
@@ -630,5 +755,10 @@ input[type="checkbox"] {
     top: 40px;
     left: 10px;
     width: 160px;
+  }
+  .back-button {
+    bottom: 15px;
+    left: 15px;
+    padding: 10px 15px;
   }
 }

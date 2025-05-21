@@ -2,6 +2,26 @@
 window.App = window.App || {};
 
 App.init = function() {
+  const mensagensLoading = [
+    "A carregar cafés para os paleontólogos...",
+    "A escavar fósseis milenares...",
+    "A alinhar as camadas geológicas...",
+    "A verificar o GPS dos dinossauros...",
+    "A desenhar trilhos interativos...",
+    "A catalogar fósseis digitais...",
+    "A carregar todas as layers... quase lá!"
+  ];
+
+  let loadingIndex = 0;
+  const loadingTextEl = document.getElementById("loading-text");
+
+  const loadingInterval = setInterval(() => {
+    if (loadingTextEl) {
+      loadingTextEl.textContent = mensagensLoading[loadingIndex];
+      loadingIndex = (loadingIndex + 1) % mensagensLoading.length;
+    }
+  }, 800);
+
   App.setupUI();
   App.createMap();
 
@@ -28,6 +48,19 @@ App.init = function() {
 
   // Carregar dados iniciais
   App.loadInitialData();
+
+  // Esconder o overlay de loading quando tudo estiver carregado
+  setTimeout(function() {
+    clearInterval(loadingInterval); // para o ciclo de mensagens
+
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+      loadingOverlay.style.opacity = '0';
+      setTimeout(function() {
+        loadingOverlay.style.display = 'none';
+      }, 300);
+    }
+  }, 4000); // aumenta um pouco o tempo para dar espaço às animações
 };
 
 App.setupUI = function() {

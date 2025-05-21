@@ -14,6 +14,18 @@
   <link rel="stylesheet" href="../css/ol-ext.css">
 </head>
 <body>
+  <div id="loading-overlay">
+    <div class="loading-spinner">
+      <div class="spinner-circle"></div>
+      <div class="spinner-circle"></div>
+      <div class="spinner-circle"></div>
+      <p class="loading-text" id="loading-text">A preparar a aventura...</p>
+    </div>
+  </div>
+  <button onclick="window.location.href='../pages/main.php'" id="back-button" class="back-button" title="Voltar à página inicial" style="z-index: 1000; cursor: pointer; border: none; outline: none; top: 20px; left: 20px; bottom: auto;">
+    <i class="fas fa-arrow-left"></i>
+    <span>Voltar</span>
+  </button>
   <!-- Mapa -->
   <div id="mapa">
     <!-- Seleção de camadas -->

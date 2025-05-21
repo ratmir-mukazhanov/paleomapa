@@ -12,23 +12,30 @@ $dashboardService = new DashboardService();
 
 // Parâmetros de paginação
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$limit = 20; // 20 registros por página
+$limit = 20; // 20 registos por página
 if ($page < 1) $page = 1;
 
-// Buscar fósseis com paginação
-$fossils = $dashboardService->getAllFossils($page, $limit);
+// Termo de pesquisa
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 
-// Contar o total de fósseis para calcular o número de páginas
-$totalFossils = $dashboardService->countFossils();
+// Se for uma requisição de pesquisa, ajustamos os parâmetros
+if (!empty($searchTerm)) {
+    $fossils = $dashboardService->searchFossils($searchTerm, $page, $limit);
+    $totalFossils = $dashboardService->countSearchResults($searchTerm);
+} else {
+    // Busca normal com paginação
+    $fossils = $dashboardService->getAllFossils($page, $limit);
+    $totalFossils = $dashboardService->countFossils();
+}
+
 $totalPages = ceil($totalFossils / $limit);
 
 // Garantir que a página atual não seja maior que o total de páginas
 if ($page > $totalPages && $totalPages > 0) {
-    header("Location: ?page={$totalPages}");
+    header("Location: ?page={$totalPages}" . (!empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''));
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -379,13 +386,22 @@ require_once "../components/sidebar.php";
                 </button>
             </div>
 
-            <div class="search-container">
-                <input type="text" id="searchFossil" class="search-input" placeholder="Pesquisar por título, reino, descobridor...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
+            <form class="search-container" method="GET" action="">
+                <input type="text" id="searchFossil" name="search" class="search-input"
+                       placeholder="Pesquisar por título, reino, descobridor..."
+                       value="<?php echo htmlspecialchars($searchTerm); ?>">
+                <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                <?php if(!empty($searchTerm)): ?>
+                    <a href="fossils-management.php" class="search-btn"
+                       style="background-color: #6c757d; display: flex; align-items: center; justify-content: center;"
+                       title="Limpar pesquisa">
+                        <i class="fas fa-times"></i>
+                    </a>
+                <?php endif; ?>
+            </form>
 
             <?php if (empty($fossils)): ?>
-                <p>Não existem fósseis registrados.</p>
+                <p>Não existem fósseis registados.</p>
             <?php else: ?>
                 <table class="fossils-table">
                     <thead>
@@ -436,46 +452,48 @@ require_once "../components/sidebar.php";
                     </tbody>
                 </table>
 
-                <!-- Paginação -->
-                <?php if ($totalPages > 1): ?>
-                    <div class="pagination">
-                        <?php if ($page > 1): ?>
-                            <a href="?page=1" title="Primeira página">&laquo;&laquo;</a>
-                            <a href="?page=<?php echo $page-1; ?>" title="Página anterior">&laquo;</a>
-                        <?php endif; ?>
+            <!-- Paginação -->
+            <?php if ($totalPages > 1): ?>
+                <div class="pagination">
+                    <?php if ($page > 1): ?>
+                        <a href="?page=1<?php echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; ?>" title="Primeira página">&laquo;&laquo;</a>
+                        <a href="?page=<?php echo $page-1; ?><?php echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; ?>" title="Página anterior">&laquo;</a>
+                    <?php endif; ?>
 
-                        <?php
-                        // Mostrar 5 páginas: 2 antes e 2 depois da atual
-                        $startPage = max(1, $page - 2);
-                        $endPage = min($totalPages, $page + 2);
+                    <?php
+                    // Mostrar 5 páginas: 2 antes e 2 depois da atual
+                    $startPage = max(1, $page - 2);
+                    $endPage = min($totalPages, $page + 2);
 
-                        // Garantir que sempre mostremos 5 links (se possível)
-                        if ($endPage - $startPage < 4) {
-                            if ($startPage == 1) {
-                                $endPage = min($totalPages, $startPage + 4);
-                            } elseif ($endPage == $totalPages) {
-                                $startPage = max(1, $endPage - 4);
-                            }
+                    // Garantir que sempre mostremos 5 links (se possível)
+                    if ($endPage - $startPage < 4) {
+                        if ($startPage == 1) {
+                            $endPage = min($totalPages, $startPage + 4);
+                        } elseif ($endPage == $totalPages) {
+                            $startPage = max(1, $endPage - 4);
                         }
+                    }
 
-                        for ($i = $startPage; $i <= $endPage; $i++): ?>
-                            <?php if ($i == $page): ?>
-                                <span><?php echo $i; ?></span>
-                            <?php else: ?>
-                                <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            <?php endif; ?>
-                        <?php endfor; ?>
-
-                        <?php if ($page < $totalPages): ?>
-                            <a href="?page=<?php echo $page+1; ?>" title="Próxima página">&raquo;</a>
-                            <a href="?page=<?php echo $totalPages; ?>" title="Última página">&raquo;&raquo;</a>
+                    for ($i = $startPage; $i <= $endPage; $i++): ?>
+                        <?php if ($i == $page): ?>
+                            <span><?php echo $i; ?></span>
+                        <?php else: ?>
+                            <a href="?page=<?php echo $i; ?><?php echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; ?>"><?php echo $i; ?></a>
                         <?php endif; ?>
-                    </div>
-                    <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #666;">
-                        Mostrando <?php echo count($fossils); ?> de <?php echo $totalFossils; ?> registros
-                    </div>
-                <?php endif; ?>
+                    <?php endfor; ?>
 
+                    <?php if ($page < $totalPages): ?>
+                        <a href="?page=<?php echo $page+1; ?><?php echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; ?>" title="Próxima página">&raquo;</a>
+                        <a href="?page=<?php echo $totalPages; ?><?php echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; ?>" title="Última página">&raquo;&raquo;</a>
+                    <?php endif; ?>
+                </div>
+                <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #666;">
+                    Mostrando <?php echo count($fossils); ?> de <?php echo $totalFossils; ?> registos
+                    <?php if (!empty($searchTerm)): ?>
+                        para a pesquisa "<?php echo htmlspecialchars($searchTerm); ?>"
+                    <?php endif; ?>
+                <?php endif; ?>
+                </div>
             <?php endif; ?>
         </div>
     </div>
@@ -621,14 +639,6 @@ require_once "../components/sidebar.php";
             const date = new Date(dateString);
             return date.toLocaleDateString('pt-PT');
         }
-
-        // Pesquisa na tabela (apenas na página atual)
-        $("#searchFossil").on("keyup", function() {
-            const value = $(this).val().toLowerCase();
-            $(".fossils-table tbody tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
     });
 </script>
 </body>
