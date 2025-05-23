@@ -7,11 +7,12 @@
 ## 🌍 Funcionalidades Principais
 
 - **Mapa Interativo** com visualização de fósseis, sítios arqueológicos e pontos de interesse.
-- **Filtragem Avançada** por idade geológica, tipo de fóssil, distrito e raio de distância.
-- **Painel Administrativo** para inserção, edição e remoção de registos.
+- **Filtragem Avançada** por idade geológica, tipo de fóssil (espécie, família, ordem, genése, etc) e raio de distância.
+- **Painel Administrativo** para inserção, edição e remoção de registos paleontológicos e pedidos de contacto.
 - **Contextualização Geográfica** com museus, parques, cafés e zonas de descanso.
-- **Importação Automatizada** de dados paleontológicos (CSV/GeoJSON).
-- **Cálculo de Isócronas** (tempo de deslocação a pé, de bicicleta ou de carro).
+- **Importação Automatizada** de dados paleontológicos (Excel).
+- **Exportação Automatizada** de dados paleontológicos (SQL, Excel, CSV).
+- **Cálculo de Isócronas** (tempo de deslocação a pé, de bicicleta ou de carro - 5, 10, 15 minutos).
 - **Camadas Personalizadas** com alternância dinâmica.
 
 ## 🧱 Tecnologias Utilizadas
@@ -40,7 +41,7 @@
 - 📁 `/js` – Scripts JavaScript da aplicação  
 - 📁 `/login` – Página e lógica de autenticação  
 - 📁 `/pages` – Páginas da aplicação (mapa, detalhes, etc.)  
-- 📁 `/scripts` – Scripts auxiliares (ex: importação, cálculos)  
+- 📁 `/scripts` – Scripts PHP (ex: importação, cálculos, chamadas de camadas, etc)  
 - 📁 `/services` – Serviços de lógica backend/API  
 - 📁 `/vendor` – Dependências PHP geridas pelo Composer  
 - 📄 `index.php` – Ponto de entrada da aplicação  
@@ -59,7 +60,6 @@ cd paleomapa
 PostGIS e PgRouting
 psql -U teu_utilizador -c "CREATE DATABASE paleomapa;"
 psql -U teu_utilizador -d paleomapa -c "CREATE EXTENSION postgis;"
-psql -U teu_utilizador -d paleomapa -c "CREATE EXTENSION pgrouting;"
 ```
 ### 3. Importar os dados iniciais
 ```bash
