@@ -3,13 +3,14 @@ $config = require '../db/db_config.php';
 $dsn = "pgsql:host={$config['host']};dbname={$config['dbname']}";
 $pdo = new PDO($dsn, $config['user'], $config['pass']);
 
-// Consulta somente os campos necessários e a geometria em formato GeoJSON
-$source = $_GET['source'] ?? '';
-$family = $_GET['family'] ?? '';
-$order = $_GET['order'] ?? '';
-$genus = $_GET['genus'] ?? '';
-$species = $_GET['species'] ?? '';
+// Receber parâmetros da URL
+$source = isset($_GET['source']) ? trim($_GET['source']) : '';
+$family = isset($_GET['family']) ? trim($_GET['family']) : '';
+$order = isset($_GET['order']) ? trim($_GET['order']) : '';
+$genus = isset($_GET['genus']) ? trim($_GET['genus']) : '';
+$species = isset($_GET['species']) ? trim($_GET['species']) : '';
 
+// Query base
 $sql = "
     SELECT
       id,
@@ -21,23 +22,42 @@ $sql = "
     WHERE geom IS NOT NULL
 ";
 
-if ($source !== '') {$sql .= " AND source ILIKE '%" . pg_escape_string($source) . "%'";}
+// Preparar parâmetros
+$params = [];
 
-if ($family !== '') {$sql .= " AND family ILIKE '%" . pg_escape_string($family) . "%'";}
+// Adicionar condições usando prepared statements para maior segurança
+if (!empty($source)) {
+    $sql .= " AND LOWER(source) LIKE LOWER(:source)";
+    $params[':source'] = "%{$source}%";
+}
 
-if ($order !== '') {$sql .= " AND \"order\" ILIKE '%" . pg_escape_string($order) . "%'";}
+if (!empty($family)) {
+    $sql .= " AND LOWER(family) LIKE LOWER(:family)";
+    $params[':family'] = "%{$family}%";
+}
 
-if ($genus !== '') {$sql .= " AND genus ILIKE '%" . pg_escape_string($genus) . "%'";}
+if (!empty($order)) {
+    $sql .= " AND LOWER(\"order\") LIKE LOWER(:order)";
+    $params[':order'] = "%{$order}%";
+}
 
-if ($species !== '') {$sql .= " AND species ILIKE '%" . pg_escape_string($species) . "%'";}
+if (!empty($genus)) {
+    $sql .= " AND LOWER(genus) LIKE LOWER(:genus)";
+    $params[':genus'] = "%{$genus}%";
+}
 
+if (!empty($species)) {
+    $sql .= " AND LOWER(species) LIKE LOWER(:species)";
+    $params[':species'] = "%{$species}%";
+}
 
-$stmt = $pdo->query($sql);
+// Preparar e executar a consulta
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 
+// Processar resultados
 $features = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-    // Decodifica a geometria GeoJSON para transformar em array
     $geometry = json_decode($row['geom_json'], true);
 
     $features[] = [
@@ -57,6 +77,6 @@ $geojson = [
     'features' => $features
 ];
 
-// Retorna o JSON
+// Retornar o JSON
 header('Content-Type: application/json');
 echo json_encode($geojson, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);

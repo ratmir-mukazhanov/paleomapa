@@ -81,33 +81,330 @@ html, body {
 }
 
 #layer-toggle {
-  /*top: 10px;*/
-  /*right: 10px;*/
   top: 10%;
   right: 2%;
+  background-color: rgba(59, 45, 30, 0.85);
+  backdrop-filter: blur(12px);
+  color: white;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+  z-index: 10;
 }
 
+#layer-toggle select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#layer-toggle select:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#layer-toggle select option {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+/* Estilos para o painel de filtros */
 #filters {
-  /*top: 90px;*/
-  /*left: 10px;*/
-  top: 20%;
+  position: absolute;
+  top: 10%; /* Posição mais alta */
   left: 2%;
+  max-height: 80vh; /* Aumentar altura máxima */
+  width: 280px; /* Largura fixa para garantir mais espaço */
+  overflow-y: auto;
+  background-color: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  color: white;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+  z-index: 10;
 }
 
-/* Estilo para os links das fontes de dados */
-.tech-item {
-  position: relative;
+#filters::-webkit-scrollbar {
+  width: 6px;
 }
 
-.source-link {
-  margin-left: 8px;
+#filters::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+#filters::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* Adicione estes estilos ao final do style.css */
+.filter-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--primary-dark);
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-header i {
   color: var(--accent-color);
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  font-size: 0.8rem;
+  font-size: 18px;
+  margin-right: 10px;
 }
 
-.source-link:hover {
+.filter-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.filter-section {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-section h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: var(--highlight);
+  font-weight: 500;
+}
+
+.range-control {
+  margin-bottom: 15px;
+}
+
+.range-control label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.range-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-slider input[type="range"] {
+  flex-grow: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  appearance: none;
+  outline: none;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  background: var(--highlight);
+}
+
+.range-value {
+  background-color: var(--primary-color);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+  min-width: 25px;
+  text-align: center;
+}
+
+.filter-item {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.filter-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.search-input {
+  position: relative;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.search-input i.fa-search {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+.search-input input {
+  width: 100%;
+  padding: 12px 12px 12px 35px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  transition: var(--transition);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.clear-input {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 14px;
+  display: none;
+  padding: 0;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.clear-input:hover {
+  color: var(--text-white);
   opacity: 1;
-  transform: translateY(-2px);
+}
+
+.clear-input.visible {
+  display: block;
+}
+
+.search-input input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dropdown-list {
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: rgba(70, 55, 40, 0.95);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: none;
+  position: absolute;
+  width: calc(100% - 30px);
+  z-index: 1010;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-list.dropup {
+  bottom: 100%; /* Posiciona acima do elemento pai */
+  top: auto; /* Cancela o posicionamento padrão */
+  margin-bottom: 5px; /* Espaço entre o input e o dropdown */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); /* Sombra ajustada para direção de cima */
+}
+
+#dropdownListGenus, #dropdownListSpecies {
+  max-height: 180px; /* Um pouco maior para mostrar mais opções */
+}
+
+.dropdown-list li {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.dropdown-list li:hover {
+  background-color: var(--primary-color);
+}
+
+.dropdown-list li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* Estilos para o botão de zoom */
+.ol-zoom {
+  top: 150px;
+  left: auto; /* Remover posicionamento à esquerda */
+  right: 20px; /* Posicionar à direita */
+  background-color: rgba(67, 56, 49, 0.75);
+  padding: 2px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.ol-zoom .ol-zoom-in,
+.ol-zoom .ol-zoom-out {
+  background-color: transparent;
+  color: white;
+  margin: 1px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.ol-zoom .ol-zoom-in:hover,
+.ol-zoom .ol-zoom-out:hover {
+  background-color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+/* Ajustes para o botão de voltar */
+.back-button {
+  bottom: auto;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* Ajuste para o toolbox */
+#toolbox {
+  top: 80px;
+  right: 62px;
 }

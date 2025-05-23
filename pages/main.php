@@ -86,7 +86,6 @@ require_once "../components/sidebar.php";
                     <div id="popup" class="ol-popup">
                     <div id="popup-content"></div>
                 </div>
-
                     <div id="layer-toggle">
                         <label for="baselayer-select"><strong>Base Layer:</strong></label><br>
                         <select id="baselayer-select">
@@ -96,40 +95,94 @@ require_once "../components/sidebar.php";
                         </select>
                     </div>
 
-                    <div id="filters">
-                        <strong>Filtros:</strong><br>
-                        <!-- Filtros -->
+                    <div id="filters" class="filter-panel">
+                        <div class="filter-header">
+                            <i class="fas fa-filter"></i>
+                            <h3>Filtros</h3>
+                        </div>
 
-                        <label for="distanceInput">Distância de Cluster:</label>
-                        <input type="range" id="distanceInput" min="1" max="100" value="10" step="1">
-                        <span id="distanceValue">10</span><br><br>
-                        
-                        <label for="minDistanceInput">Distância Mínima:</label>
-                        <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
-                        <span id="minDistanceValue">5</span><br><br>
+                        <div class="filter-section">
+                            <h4>Configurações de Cluster</h4>
+                            <div class="range-control">
+                                <label for="distanceInput">Distância de Cluster:</label>
+                                <div class="range-slider">
+                                    <input type="range" id="distanceInput" min="1" max="100" value="10" step="1">
+                                    <span id="distanceValue" class="range-value">10</span>
+                                </div>
+                            </div>
 
-                        <label>Filtrar por:</label><br><br>
-                        
-                        <label>Source</label>
-                        <input type="text" id="searchInputSource" placeholder="A pesquisar sem filtro">
-                            <ul id="dropdownListSource" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
+                            <div class="range-control">
+                                <label for="minDistanceInput">Distância Mínima:</label>
+                                <div class="range-slider">
+                                    <input type="range" id="minDistanceInput" min="1" max="50" value="5" step="1">
+                                    <span id="minDistanceValue" class="range-value">5</span>
+                                </div>
+                            </div>
+                        </div>
 
-                        <label>Family</label>
-                        <input type="text" id="searchInputFamily" placeholder="A pesquisar sem filtro">
-                            <ul id="dropdownListFamily" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
+                        <div class="filter-section">
+                            <h4>Filtrar por Categoria</h4>
 
-                        <label>Order</label>
-                        <input type="text" id="searchInputOrder" placeholder="A pesquisar sem filtro">
-                            <ul id="dropdownListOrder" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
+                            <div class="filter-item">
+                                <label>Source</label>
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="searchInputSource" placeholder="A pesquisar sem filtro">
+                                    <button type="button" class="clear-input" id="clearSource">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <ul id="dropdownListSource" class="dropdown-list"></ul>
+                            </div>
 
-                        <label>Genus</label>
-                        <input type="text" id="searchInputGenus" placeholder="A pesquisar sem filtro">
-                            <ul id="dropdownListGenus" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul><br><br>
+                            <div class="filter-item">
+                                <label>Family</label>
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="searchInputFamily" placeholder="A pesquisar sem filtro">
+                                    <button type="button" class="clear-input" id="clearFamily">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <ul id="dropdownListFamily" class="dropdown-list"></ul>
+                            </div>
 
-                        <label>Species</label>
-                        <input type="text" id="searchInputSpecies" placeholder="A pesquisar sem filtro">
-                            <ul id="dropdownListSpecies" style="border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; position:absolute; background:#fff; width:200px"></ul>
+                            <div class="filter-item">
+                                <label>Order</label>
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="searchInputOrder" placeholder="A pesquisar sem filtro">
+                                    <button type="button" class="clear-input" id="clearOrder">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <ul id="dropdownListOrder" class="dropdown-list"></ul>
+                            </div>
 
+                            <div class="filter-item">
+                                <label>Genus</label>
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="searchInputGenus" placeholder="A pesquisar sem filtro">
+                                    <button type="button" class="clear-input" id="clearGenus">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <ul id="dropdownListGenus" class="dropdown-list"></ul>
+                            </div>
+
+                            <div class="filter-item">
+                                <label>Species</label>
+                                <div class="search-input">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="searchInputSpecies" placeholder="A pesquisar sem filtro">
+                                    <button type="button" class="clear-input" id="clearSpecies">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <ul id="dropdownListSpecies" class="dropdown-list"></ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@ const clustersLayer = new ol.layer.Vector({
                 color: '#fff',
             }),
             fill: new ol.style.Fill({
-                color: '#3399CC',
+                color: '#5d4a38',
             }),
             }),
             text: new ol.style.Text({
@@ -234,4 +234,91 @@ document.getElementById('distanceInput').addEventListener('input', (e) => {
 
     clusterSource.setMinDistance(minDistance);
 
+});
+
+
+$('#searchInputSource, #searchInputFamily, #searchInputOrder, #searchInputGenus, #searchInputSpecies').on('input', function() {
+    const inputId = $(this).attr('id');
+    const clearButtonId = 'clear' + inputId.replace('searchInput', '');
+
+    if ($(this).val().length > 0) {
+        $('#' + clearButtonId).addClass('visible');
+    } else {
+        $('#' + clearButtonId).removeClass('visible');
+    }
+});
+
+// Verificar inputs ao carregar a página
+$(document).ready(function() {
+    $('#searchInputSource, #searchInputFamily, #searchInputOrder, #searchInputGenus, #searchInputSpecies').each(function() {
+        const inputId = $(this).attr('id');
+        const clearButtonId = 'clear' + inputId.replace('searchInput', '');
+
+        if ($(this).val().length > 0) {
+            $('#' + clearButtonId).addClass('visible');
+        }
+    });
+});
+
+// Função para limpar o input e atualizar o mapa
+$('#clearSource, #clearFamily, #clearOrder, #clearGenus, #clearSpecies').click(function() {
+    const buttonId = $(this).attr('id');
+    const inputId = 'searchInput' + buttonId.replace('clear', '');
+
+    // Limpar o valor do input
+    $('#' + inputId).val('').trigger('input');
+
+    // Ocultar o botão X
+    $(this).removeClass('visible');
+
+    // Atualizar o mapa com o filtro removido
+    updateVectorSource();
+
+    // Fechar qualquer dropdown que esteja aberto
+    $('.dropdown-list').hide();
+});
+
+// Adicionar botão X quando um item do dropdown é selecionado
+$(".dropdown-list").on('click', 'li', function() {
+    const dropdownId = $(this).parent().attr('id');
+    const inputId = dropdownId.replace('dropdownList', 'searchInput');
+    const clearButtonId = dropdownId.replace('dropdownList', 'clear');
+
+    // Mostrar o botão X após selecionar um item
+    $('#' + clearButtonId).addClass('visible');
+});
+
+// Função para determinar se um dropdown deve abrir para cima
+function setupDropdownDirection() {
+    // Define os últimos dois dropdowns para abrir para cima
+    $('#dropdownListGenus, #dropdownListSpecies').addClass('dropup');
+
+    // Função para verificar e ajustar a direção do dropdown conforme o espaço disponível
+    $('.search-input input').on('focus', function() {
+        const inputId = $(this).attr('id');
+        const dropdownId = inputId.replace('searchInput', 'dropdownList');
+        const $dropdown = $('#' + dropdownId);
+
+        // Se for um dos últimos dois dropdowns
+        if (dropdownId === 'dropdownListGenus' || dropdownId === 'dropdownListSpecies') {
+            $dropdown.addClass('dropup');
+        } else {
+            // Para os outros, verifique o espaço disponível
+            const inputBottom = $(this).offset().top + $(this).outerHeight();
+            const windowHeight = $(window).height();
+            const spaceBelow = windowHeight - inputBottom;
+
+            // Se houver pouco espaço abaixo (menos de 200px), abra para cima
+            if (spaceBelow < 200) {
+                $dropdown.addClass('dropup');
+            } else {
+                $dropdown.removeClass('dropup');
+            }
+        }
+    });
+}
+
+// Inicialize a função quando o documento estiver pronto
+$(document).ready(function() {
+    setupDropdownDirection();
 });
