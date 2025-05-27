@@ -73,13 +73,23 @@ require_once "../components/sidebar.php";
         </div>
     </div>
     </div>
-    <div class="mapaDiv" id="mapaOpenlayers">
+
+
+    <button id="changeMap" class="changeMapBtn" styles="display:none;">Click Me</button>
+
+    <div class="routingMapaDiv" id="mapaRouting" style="display:none;">
+
+      <iframe id="routing_iframe" src="routing.html" style="border:none;" title="Iframe Example"></iframe>
+
+    </div>
+
+    <div class="mapaDiv" id="mapaOpenlayers" style="display:block;">
         <div class="layout-wrapper">
             <?php require_once "../components/header.php"; ?>
 
             <div class="layout-body">
                 <?php require_once "../components/sidebar.php"; ?>
-
+          
                 <div class="main-content" id="fullscreen">
                     <div id="map"></div>
 

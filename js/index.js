@@ -557,3 +557,33 @@ function dropdownSearch(items, searchInput, dropdownList) {
   });
 
 }
+
+
+
+$("#changeMap").on("click", function() {
+  changeMap();
+});
+
+function changeMap() {
+
+  var x = document.getElementById("mapaOpenlayers");
+  var y = document.getElementById("mapaRouting");
+
+
+  if (x.style.display === "block" && y.style.display === "none") {
+
+    x.style.display = "none";
+    y.style.display = "block";
+
+  } else {
+
+    x.style.display = "block";
+    y.style.display = "none";
+
+  }
+
+}
+
+
+
+

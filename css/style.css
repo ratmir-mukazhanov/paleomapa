@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -22,7 +23,8 @@ html, body {
 .sidebar-navigation {
   width: 80px;
   background-color: #313443;
-  height: calc(100vh - 60px); /* altura total menos o header */
+  height: calc(100vh - 60px);
+  /* altura total menos o header */
   position: relative;
   flex-shrink: 0;
 }
@@ -61,7 +63,7 @@ html, body {
 
 .ol-popup {
   position: absolute;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   background: white;
   padding: 8px;
   border: 1px solid #ccc;
@@ -72,7 +74,8 @@ html, body {
   display: none;
 }
 
-#layer-toggle, #filters {
+#layer-toggle,
+#filters {
   position: absolute;
   background: white;
   padding: 8px;
@@ -117,10 +120,13 @@ html, body {
 /* Estilos para o painel de filtros */
 #filters {
   position: absolute;
-  top: 10%; /* Posição mais alta */
+  top: 10%;
+  /* Posição mais alta */
   left: 2%;
-  max-height: 80vh; /* Aumentar altura máxima */
-  width: 280px; /* Largura fixa para garantir mais espaço */
+  max-height: 80vh;
+  /* Aumentar altura máxima */
+  width: 280px;
+  /* Largura fixa para garantir mais espaço */
   overflow-y: auto;
   background-color: var(--panel-bg);
   backdrop-filter: blur(12px);
@@ -323,14 +329,20 @@ html, body {
 }
 
 .dropdown-list.dropup {
-  bottom: 100%; /* Posiciona acima do elemento pai */
-  top: auto; /* Cancela o posicionamento padrão */
-  margin-bottom: 5px; /* Espaço entre o input e o dropdown */
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15); /* Sombra ajustada para direção de cima */
+  bottom: 100%;
+  /* Posiciona acima do elemento pai */
+  top: auto;
+  /* Cancela o posicionamento padrão */
+  margin-bottom: 5px;
+  /* Espaço entre o input e o dropdown */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+  /* Sombra ajustada para direção de cima */
 }
 
-#dropdownListGenus, #dropdownListSpecies {
-  max-height: 180px; /* Um pouco maior para mostrar mais opções */
+#dropdownListGenus,
+#dropdownListSpecies {
+  max-height: 180px;
+  /* Um pouco maior para mostrar mais opções */
 }
 
 .dropdown-list li {
@@ -365,8 +377,10 @@ html, body {
 /* Estilos para o botão de zoom */
 .ol-zoom {
   top: 150px;
-  left: auto; /* Remover posicionamento à esquerda */
-  right: 20px; /* Posicionar à direita */
+  left: auto;
+  /* Remover posicionamento à esquerda */
+  right: 20px;
+  /* Posicionar à direita */
   background-color: rgba(67, 56, 49, 0.75);
   padding: 2px;
   border-radius: 16px;
@@ -407,4 +421,11 @@ html, body {
 #toolbox {
   top: 80px;
   right: 62px;
+}
+
+.changeMapBtn {
+  position: absolute;
+  right: 15px;
+  bottom: auto;
+  left: auto;
 }
