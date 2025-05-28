@@ -423,9 +423,107 @@ body {
   right: 62px;
 }
 
-.changeMapBtn {
+/* Estilos para o botão de alternar mapa */
+.map-toggle-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10
+;
+  text-align: center;
+}
+
+.map-toggle-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.map-toggle-btn:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.map-toggle-btn i {
+  font-size: 18px;
+}
+
+/* Estilos para o mapa de routing */
+.routingMapaDiv {
+  width: 100%;
+  height: 100%;
+}
+
+.routingMapaDiv .main-content {
+  position: relative;
+}
+
+#routing_iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Estilo para botões de navegação */
+.fixed-map-navigation {
   position: absolute;
-  right: 15px;
-  bottom: auto;
-  left: auto;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  padding: 10px;
+  border-radius: 30px;
+  background-color: #3a2e22;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.map-nav-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.map-nav-btn:hover {
+  color: white;
+  background-color: #3a2e22;
+}
+
+.map-nav-btn.active {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 2px 8px rgba(233, 162, 59, 0.4);
+}
+
+.map-nav-btn i {
+  font-size: 16px;
+}
+
+/* Animação de transição para os mapas */
+#mapaOpenlayers, #mapaRouting {
+  transition: opacity 0.5s ease;
 }

@@ -74,13 +74,28 @@ require_once "../components/sidebar.php";
     </div>
     </div>
 
-
-    <button id="changeMap" class="changeMapBtn" styles="display:none;">Click Me</button>
-
     <div class="routingMapaDiv" id="mapaRouting" style="display:none;">
+        <div class="layout-wrapper">
+            <?php require_once "../components/header.php"; ?>
 
-      <iframe id="routing_iframe" src="routing.html" style="border:none;" title="Iframe Example"></iframe>
+            <div class="layout-body">
+                <?php require_once "../components/sidebar.php"; ?>
 
+                <div class="main-content" id="fullscreen">
+                    <div class="fixed-map-navigation">
+                        <button id="fosseis-button-routing" class="map-nav-btn fosseis-btn">
+                            <i class="fas fa-bone"></i>
+                            <span>Explorar Fósseis</span>
+                        </button>
+                        <button id="routing-button-routing" class="map-nav-btn active routing-btn">
+                            <i class="fas fa-route"></i>
+                            <span>Roteiro</span>
+                        </button>
+                    </div>
+                    <iframe id="routing_iframe" src="routing.html" style="width:100%; height:100%; border:none;" title="Mapa de Rotas"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="mapaDiv" id="mapaOpenlayers" style="display:block;">
@@ -91,6 +106,16 @@ require_once "../components/sidebar.php";
                 <?php require_once "../components/sidebar.php"; ?>
           
                 <div class="main-content" id="fullscreen">
+                    <div class="fixed-map-navigation">
+                        <button id="fosseis-button-ol" class="map-nav-btn active fosseis-btn">
+                            <i class="fas fa-bone"></i>
+                            <span>Explorar Fósseis</span>
+                        </button>
+                        <button id="routing-button-ol" class="map-nav-btn routing-btn">
+                            <i class="fas fa-route"></i>
+                            <span>Roteiro</span>
+                        </button>
+                    </div>
                     <div id="map"></div>
 
                     <div id="popup" class="ol-popup">
@@ -488,13 +513,46 @@ require_once "../components/sidebar.php";
     <script src="../js/mapa.js"></script>
     <script src="../js/about_us.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('.faq-question').click(function() {
-            $(this).toggleClass('active');
-            $(this).next('.faq-answer').toggleClass('show');
-        });
-    });
-    </script>
+        <script>
+            $(document).ready(function() {
+                $('.faq-question').click(function() {
+                    $(this).toggleClass('active');
+                    $(this).next('.faq-answer').toggleClass('show');
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                // Selecionando todos os botões pela classe
+                const fosseisBtns = document.querySelectorAll('.fosseis-btn');
+                const routingBtns = document.querySelectorAll('.routing-btn');
+                const mapaOpenlayers = document.getElementById('mapaOpenlayers');
+                const mapaRouting = document.getElementById('mapaRouting');
+
+                // Adicionando eventos para todos os botões de fósseis
+                fosseisBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        // Mostrar mapa OpenLayers
+                        mapaOpenlayers.style.display = 'block';
+                        mapaRouting.style.display = 'none';
+
+                        // Atualizar estado dos botões
+                        fosseisBtns.forEach(b => b.classList.add('active'));
+                        routingBtns.forEach(b => b.classList.remove('active'));
+                    });
+                });
+
+                // Adicionando eventos para todos os botões de routing
+                routingBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        // Mostrar mapa de routing
+                        mapaOpenlayers.style.display = 'none';
+                        mapaRouting.style.display = 'block';
+
+                        // Atualizar estado dos botões
+                        routingBtns.forEach(b => b.classList.add('active'));
+                        fosseisBtns.forEach(b => b.classList.remove('active'));
+                    });
+                });
+            });
+        </script>
 </body>
 </html>

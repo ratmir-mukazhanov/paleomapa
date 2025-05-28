@@ -9,46 +9,6 @@ html, body, #mapa {
   color: #433831; /* Tom escuro para texto base */
 }
 
-.back-button {
-  position: absolute;
-  bottom: auto;
-  top: 20px;
-  left: 20px;
-  background: rgba(67, 56, 49, 0.75);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  padding: 12px 18px;
-  color: var(--text-white);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
-
-.back-button:hover {
-  background: var(--accent-color);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-  color: white;
-  text-decoration: none;
-}
-
-.back-button i {
-  font-size: 16px;
-}
-
-.back-button span {
-  font-size: 16px;
-}
-
 /* Estilo comum para todos os painéis e toolboxes */
 #toolbox, #toolbox1, #container_slider, .layer-filters {
   position: absolute;
@@ -617,7 +577,7 @@ html, body, #mapa {
   src: url("../font/StoneAge.ttf");
 }
 
-/* Controles OpenLayers mais elegantes */
+/* Controlos OpenLayers mais elegantes */
 .ol-control {
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
@@ -637,7 +597,7 @@ html, body, #mapa {
 }
 
 .ol-zoom {
-  top: 80px;
+  top: 40px;
   left: 20px;
 }
 
@@ -755,10 +715,5 @@ input[type="checkbox"] {
     top: 40px;
     left: 10px;
     width: 160px;
-  }
-  .back-button {
-    bottom: 15px;
-    left: 15px;
-    padding: 10px 15px;
   }
 }
