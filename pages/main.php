@@ -17,6 +17,18 @@
     <link rel="icon" href="../img/fcporto.png" type="image/png">
 </head>
 <body>
+<div id="loading-screen">
+    <div class="loading-content">
+        <div class="logo-container">
+            <img src="../img/logoFossils.png" alt="Logo Paleomapa" class="loading-logo">
+        </div>
+        <h2 class="loading-title">Paleomapa</h2>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+        <p class="loading-text">A explorar as camadas do tempo... prepara-te para uma viagem pelo passado geológico de Portugal.</p>
+    </div>
+</div>
 <?php
 require_once "../components/header.php";
 require_once "../components/sidebar.php";
@@ -40,12 +52,6 @@ require_once "../components/sidebar.php";
                 <line x1="8" y1="12" x2="16" y2="12"></line>
                 </svg>
                 Explorar Agora
-            </a>
-            <a href="../pages/routing.html" class="featured-link secondary-link">
-                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-                </svg>
-                Explorar Roteiro
             </a>
             </div>
         </div>
@@ -453,22 +459,26 @@ require_once "../components/sidebar.php";
                             <button type="submit" class="btn-submit">Enviar Mensagem</button>
                         </form>
                     </div>
-                    
+
                     <div class="contact-info">
                         <h2>Informação de Contacto</h2>
-                        
+
+                        <div class="institution-logo">
+                            <img src="../img/estga.png" alt="Logo ESTGA" class="contact-logo">
+                        </div>
+
                         <div class="info-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>R. Cmte. Pinho e Freitas 28, 3750-127 Águeda<br>Escola Superior de Tecnologia e Gestão de Águeda</span>
                         </div>
-                        
+
                         <div class="info-item">
                             <i class="fas fa-envelope"></i>
                             <span>paleomapaestga@gmail.com</span>
                         </div>
 
                         <div class="map-container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.4064575899856!2d-8.450192684595843!3d40.57232725373837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd23a7f4cbb835c5%3A0xe8bedfed9d76b244!2sEscola%20Superior%20de%20Tecnologia%20e%20Gest%C3%A3o%20de%20%C3%81gueda!5e0!3m2!1spt-PT!2spt!4v1712419351056!5m2!1spt-PT!2spt" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d401.3386257242928!2d-8.443593210340932!3d40.57459509752929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd230982ea9570a1%3A0x15e2e89202d3bff4!2sEscola%20Superior%20de%20Tecnologia%20e%20Gest%C3%A3o%20de%20%C3%81gueda!5e0!3m2!1spt-PT!2spt!4v1749292062617!5m2!1spt-PT!2spt" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>

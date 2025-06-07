@@ -38,7 +38,7 @@ if (empty($fields)) {
     die("Nenhum campo válido selecionado.");
 }
 
-// Conectar ao banco de dados
+// Conectar à base de dados
 $config = require '../db/db_config.php';
 $dsn = "pgsql:host={$config['host']};dbname={$config['dbname']}";
 
@@ -75,7 +75,7 @@ try {
     }
 
 } catch (PDOException $e) {
-    die("Erro na conexão com o banco de dados: " . $e->getMessage());
+    die("Erro na conexão com a base de dados: " . $e->getMessage());
 } catch (Exception $e) {
     die("Erro durante a exportação: " . $e->getMessage());
 }

@@ -30,10 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage .= "A mensagem é obrigatória.<br>";
     }
     
-    // Se não houver erros de validação, inserir no banco de dados
+    // Se não houver erros de validação, inserir na base de dados
     if (!$error) {
         try {
-            // Conectar ao banco de dados
+            // Conectar à base de dados
             $conn = connect_db();
             
             // Preparar a query SQL para inserir na tabela contact_us
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['contact_status'] = "error";
             }
             
-            // Fechar a conexão com o banco de dados
+            // Fechar a conexão com a base de dados
             pg_close($conn);
             
         } catch (Exception $e) {

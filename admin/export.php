@@ -171,7 +171,7 @@ require_once "../components/sidebar.php";
                     <div class="export-option" data-format="sql">
                         <i class="fas fa-database export-icon"></i>
                         <h3 class="export-title">SQL (.sql)</h3>
-                        <p class="export-desc">Script SQL com comandos INSERT para importar em qualquer banco de dados.</p>
+                        <p class="export-desc">Script SQL com comandos INSERT para importar em qualquer base de dados.</p>
                         <button class="export-btn" data-format="sql">
                             <i class="fas fa-download"></i> Exportar SQL
                         </button>

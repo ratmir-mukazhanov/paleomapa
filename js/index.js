@@ -584,6 +584,54 @@ function changeMap() {
 
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Garantir que a barra de progresso termine após o carregamento do DOM
+  document.querySelector('.loading-bar').style.width = '80%';
+
+  // Iniciar a contagem de recursos carregados
+  let loadedResources = 0;
+  const totalResources = document.images.length + document.querySelectorAll('script').length + document.querySelectorAll('link').length;
+  const minLoadTime = 1500; // Tempo mínimo para mostrar o loading (1.5 segundos)
+  const startTime = Date.now();
+
+  // Criar um texto "científico" aleatório para mostrar durante o carregamento
+  const loadingTexts = [
+    "A carregar dados paleontológicos...",
+    "A sincronizar eras geológicas...",
+    "A preparar os fósseis digitais...",
+    "A escavar registros históricos...",
+    "A analisar camadas estratigráficas...",
+    "A mapear sítios arqueológicos..."
+  ];
+
+  let textIndex = 0;
+  const textInterval = setInterval(function() {
+    document.querySelector('.loading-text').textContent = loadingTexts[textIndex];
+    textIndex = (textIndex + 1) % loadingTexts.length;
+  }, 800);
+
+  // Função para esconder a tela de carregamento
+  function hideLoadingScreen() {
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+
+    setTimeout(function() {
+      document.querySelector('.loading-bar').style.width = '100%';
+
+      setTimeout(function() {
+        clearInterval(textInterval);
+        document.getElementById('loading-screen').classList.add('hidden');
+      }, 500);
+    }, remainingTime);
+  }
+
+  // Verificar se a página está completamente carregada
+  window.addEventListener('load', hideLoadingScreen);
+
+  // Se a página demorar muito, esconder o loading após 6 segundos
+  setTimeout(hideLoadingScreen, 6000);
+});
+
 
 
 

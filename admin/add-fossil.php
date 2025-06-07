@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!is_numeric($latitude) || !is_numeric($longitude)) {
         $errorMsg = "Latitude e longitude devem ser valores numéricos válidos.";
     } else {
-        // Adicionar o fóssil ao banco de dados com o campo source
+        // Adicionar o fóssil à base de dados com o campo source
         $result = $dashboardService->addFossil($title, $discoveredBy, $dateDiscovered,
             $kingdom, $phylum, $class, $order,
             $family, $genus, $species,
