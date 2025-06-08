@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: fossilLabels,
             datasets: [{
-                label: 'Fósseis Cadastrados',
+                label: 'Fósseis Inseridos',
                 data: fossilCounts,
                 backgroundColor: 'rgba(194, 144, 109, 0.2)',
                 borderColor: 'rgba(194, 144, 109, 1)',

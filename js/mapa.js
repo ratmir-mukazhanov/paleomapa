@@ -169,49 +169,49 @@ if (features.length > 0) {
 });*/
 
 map.on('singleclick', function (evt) {
-
     popup.style.display = 'none';
-    
+
     const features = [];
-    
+
     map.forEachFeatureAtPixel(evt.pixel, (feature) => {
-
-      if (feature.get('features')) {
-
-        features.push(...feature.get('features'));
-
-      } else {
-
-        features.push(feature);
-
-      }
-
+        if (feature.get('features')) {
+            features.push(...feature.get('features'));
+        } else {
+            features.push(feature);
+        }
     });
-  
+
     if (features.length > 0) {
+        let html = `<strong>Registos (${features.length}):</strong><ul style="padding-left:16px;">`;
 
-      let html = `<strong>Registos (${features.length}):</strong><ul style="padding-left:16px;">`;
-      
-      features.forEach(f => {
+        features.forEach(f => {
+            const p = f.getProperties();
+            html += `<li class="fossil-popup-item">
+                <h4 class="fossil-title">${p.title || 'Fóssil sem título'}</h4>
+                <div class="fossil-details">
+                    <small class="id-field"><strong>ID:</strong> ${p.id}</small>
 
-        const p = f.getProperties();
-        html += `<li>
-          <b>${p.title}</b><br>
-          <small>ID: ${p.id}</small><br>
-          ${p.family ? `<small>Family: ${p.family}</small><br>` : ''}
-          ${p.date_discovered ? `<small>Discovered: ${p.date_discovered}</small>` : ''}
-        </li><br>`;
+                    ${p.family ? `<small><strong>Família:</strong> ${p.family}</small><br>` : ''}
+                    ${p.order ? `<small><strong>Ordem:</strong> ${p.order}</small><br>` : ''}
+                    ${p.genus ? `<small><strong>Género:</strong> ${p.genus}</small><br>` : ''}
+                    ${p.species ? `<small><strong>Espécie:</strong> ${p.species}</small><br>` : ''}
 
-      });
-  
-      html += '</ul>';
-      popupContent.innerHTML = html;
-  
-      const pixel = evt.pixel;
-      popup.style.left = `${pixel[0]}px`;
-      popup.style.top = `${pixel[1]}px`;
-      popup.style.display = 'block';
+                    ${p.discovered_by ? `<small><strong>Descoberto por:</strong> ${p.discovered_by}</small><br>` : ''}
+                    ${p.date_discovered ? `<small><strong>Data descoberta:</strong> ${p.date_discovered}</small><br>` : ''}
+                    
+                    ${p.source ? `<small><strong>Fonte:</strong> ${p.source}</small>` : ''}
+                </div>
+            </li>`;
+        });
 
+        html += '</ul>';
+        popupContent.innerHTML = html;
+        popupContent.scrollTop = 0;
+
+        const pixel = evt.pixel;
+        popup.style.left = `${pixel[0]}px`;
+        popup.style.top = `${pixel[1]}px`;
+        popup.style.display = 'block';
     }
 });
   

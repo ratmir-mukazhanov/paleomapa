@@ -52,18 +52,7 @@ if (isset($_COOKIE['remembered_email'])) {
             </button>
           </div>
         </div>
-        
-        <div class="form-options">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="remember_email" 
-                   id="remember_email" <?php echo isset($_COOKIE['remembered_email']) ? 'checked' : ''; ?>>
-            <label class="form-check-label" for="remember_email">
-              Guardar email
-            </label>
-          </div>
-          <a href="#" class="forgot-password">Esqueceu a password?</a>
-        </div>
-        
+
         <button id="btnLogin" class="w-100 btn btn-primary" type="submit">
           <span>Entrar</span>
           <i class="fas fa-arrow-right"></i>

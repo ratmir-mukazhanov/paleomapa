@@ -17,6 +17,11 @@ $sql = "
       title,
       family,
       discovered_by,
+      source,
+      \"order\",
+      genus,
+      species,
+      date_discovered,
       ST_AsGeoJSON(geom) AS geom_json
     FROM findings
     WHERE geom IS NOT NULL
@@ -64,10 +69,15 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         'type'       => 'Feature',
         'geometry'   => $geometry,
         'properties' => [
-            'id'            => $row['id'],
-            'title'         => $row['title'],
-            'family'        => $row['family'],
-            'discovered_by' => $row['discovered_by']
+            'id'              => $row['id'],
+            'title'           => $row['title'],
+            'family'          => $row['family'],
+            'discovered_by'   => $row['discovered_by'],
+            'source'          => $row['source'],
+            'order'           => $row['order'],
+            'genus'           => $row['genus'],
+            'species'         => $row['species'],
+            'date_discovered' => $row['date_discovered']
         ]
     ];
 }
