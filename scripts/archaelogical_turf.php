@@ -15,9 +15,11 @@ try {
                 'type',       'Feature',
                 'id',         osm_id,
                 'geometry',   ST_AsGeoJSON(ST_Transform(way, 4326))::jsonb,
-                'properties', to_jsonb(c) - 'geom'
+                'properties', jsonb_build_object(
+                    'name', COALESCE(name, 'Sítio arqueológico')
+                )
             ) AS feature
-            FROM (SELECT * FROM archaeological_sites) c
+            FROM archaeological_sites
         ) features;
     ";
 
