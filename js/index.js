@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
     "A carregar dados paleontológicos...",
     "A sincronizar eras geológicas...",
     "A preparar os fósseis digitais...",
-    "A escavar registros históricos...",
+    "A escavar registos históricos...",
     "A analisar camadas estratigráficas...",
     "A mapear sítios arqueológicos..."
   ];

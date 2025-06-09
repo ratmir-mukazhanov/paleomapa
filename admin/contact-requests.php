@@ -10,24 +10,38 @@ if (empty($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 require_once "../services/dashboard_service.php";
 $dashboardService = new DashboardService();
 
+// Parâmetros de paginação
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = 8; // 10 registos por página
+if ($page < 1) $page = 1;
+
 // Processar a ação para marcar como processado, se enviado
 // Processar ações de marcar ou desmarcar
 if (isset($_POST['mark_processed']) && isset($_POST['contact_id'])) {
     $contactId = $_POST['contact_id'];
     $dashboardService->markContactAsProcessed($contactId);
-    header("Location: contact-requests.php?success=1");
+    header("Location: contact-requests.php?success=1&page=" . $page);
     exit();
 }
 
 if (isset($_POST['unmark_processed']) && isset($_POST['contact_id'])) {
     $contactId = $_POST['contact_id'];
     $dashboardService->unmarkContactAsProcessed($contactId);
-    header("Location: contact-requests.php?unmarked=1");
+    header("Location: contact-requests.php?unmarked=1&page=" . $page);
     exit();
 }
 
-// Buscar todos os pedidos de contato
-$contactRequests = $dashboardService->getAllContactRequests();
+// Buscar todos os pedidos de contato paginados
+$contactRequests = $dashboardService->getContactRequestsPaginated($page, $limit);
+$totalContacts = $dashboardService->countContactRequests();
+
+$totalPages = ceil($totalContacts / $limit);
+
+// Garantir que a página atual não seja maior que o total de páginas
+if ($page > $totalPages && $totalPages > 0) {
+    header("Location: ?page={$totalPages}");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -311,6 +325,45 @@ require_once "../components/sidebar.php";
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+            <!-- Paginação -->
+            <?php if ($totalPages > 1): ?>
+            <div class="pagination">
+                <?php if ($page > 1): ?>
+                    <a href="?page=1" title="Primeira página">&laquo;&laquo;</a>
+                    <a href="?page=<?php echo $page-1; ?>" title="Página anterior">&laquo;</a>
+                <?php endif; ?>
+
+                <?php
+                // Mostrar 5 páginas: 2 antes e 2 depois da atual
+                $startPage = max(1, $page - 2);
+                $endPage = min($totalPages, $page + 2);
+
+                // Garantir que sempre mostremos 5 links (se possível)
+                if ($endPage - $startPage < 4) {
+                    if ($startPage == 1) {
+                        $endPage = min($totalPages, $startPage + 4);
+                    } elseif ($endPage == $totalPages) {
+                        $startPage = max(1, $endPage - 4);
+                    }
+                }
+
+                for ($i = $startPage; $i <= $endPage; $i++): ?>
+                    <?php if ($i == $page): ?>
+                        <span><?php echo $i; ?></span>
+                    <?php else: ?>
+                        <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <a href="?page=<?php echo $page+1; ?>" title="Próxima página">&raquo;</a>
+                    <a href="?page=<?php echo $totalPages; ?>" title="Última página">&raquo;&raquo;</a>
+                <?php endif; ?>
+            </div>
+            <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #666;">
+                Mostrando <?php echo count($contactRequests); ?> de <?php echo $totalContacts; ?> pedidos
+            </div>
+            <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>

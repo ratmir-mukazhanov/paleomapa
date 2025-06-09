@@ -525,11 +525,55 @@ require_once "../components/sidebar.php";
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
+                // Interceptar o envio do formulário
+                $('#contactForm').submit(function(e) {
+                    e.preventDefault(); // Impedir o envio tradicional do formulário
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '../scripts/process_contact.php',
+                        data: $(this).serialize(), // Serializa os dados do formulário
+                        success: function(response) {
+                            // Criar elemento de alerta
+                            let alertClass = 'alert-success';
+                            let message = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+
+                            // Se a resposta contiver status e mensagem (opcional)
+                            if (typeof response === 'object') {
+                                alertClass = (response.status === 'success') ? 'alert-success' : 'alert-error';
+                                message = response.message;
+                            }
+
+                            // Inserir alerta antes do formulário
+                            $('#contactForm').before('<div class="alert ' + alertClass + '">' + message + '</div>');
+
+                            // Limpar formulário se sucesso
+                            if (alertClass === 'alert-success') {
+                                $('#contactForm')[0].reset();
+                            }
+
+                            // Remover alerta após 5 segundos (opcional)
+                            setTimeout(function() {
+                                $('.alert').fadeOut('slow', function() {
+                                    $(this).remove();
+                                });
+                            }, 5000);
+                        },
+                        error: function() {
+                            // Exibir mensagem de erro
+                            $('#contactForm').before('<div class="alert alert-error">Ocorreu um erro ao processar o pedido. Por favor, tente novamente.</div>');
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
                 $('.faq-question').click(function() {
                     $(this).toggleClass('active');
                     $(this).next('.faq-answer').toggleClass('show');
                 });
             });
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Selecionando todos os botões pela classe
                 const fosseisBtns = document.querySelectorAll('.fosseis-btn');

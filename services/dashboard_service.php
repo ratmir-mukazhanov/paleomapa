@@ -480,9 +480,58 @@ class DashboardService {
         }
     }
 
+    /**
+     * Obtém pedidos de contacto com paginação
+     * @param int $page Número da página atual
+     * @param int $limit Número de registos por página
+     * @return array
+     */
+    public function getContactRequestsPaginated($page = 1, $limit = 10) {
+        try {
+            $offset = ($page - 1) * $limit;
+            $query = "SELECT * FROM contact_us ORDER BY submitted_at DESC LIMIT $2 OFFSET $1";
+            $result = pg_query_params($this->db_connection, $query, array($offset, $limit));
+
+            if (!$result) {
+                throw new Exception("Erro ao buscar pedidos de contacto: " . pg_last_error($this->db_connection));
+            }
+
+            $contacts = array();
+            while ($row = pg_fetch_assoc($result)) {
+                $contacts[] = $row;
+            }
+
+            return $contacts;
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return array();
+        }
+    }
 
     /**
-     * Fecha a conexão com o banco de dados
+     * Conta o total de pedidos de contacto
+     * @return int
+     */
+    public function countContactRequests() {
+        try {
+            $query = "SELECT COUNT(*) as total FROM contact_us";
+            $result = pg_query($this->db_connection, $query);
+
+            if (!$result) {
+                throw new Exception("Erro ao contar pedidos de contacto: " . pg_last_error($this->db_connection));
+            }
+
+            $row = pg_fetch_assoc($result);
+            return (int)$row['total'];
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return 0;
+        }
+    }
+
+
+    /**
+     * Fecha a conexão com a base de dados
      */
     public function __destruct() {
         if ($this->db_connection) {
