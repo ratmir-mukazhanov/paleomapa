@@ -1,90 +1,97 @@
-# 🦖 PaleoMapa - Sistema Interativo de Visualização Paleontológica
+# 🦖 [PaleoMapa](https://gis4cloud.com/grupo2_ptas2025) - Interactive Paleontological Visualization System
 
-**PaleoMapa** é uma aplicação web interativa para visualização, exploração e gestão de dados paleontológicos em Portugal. Desenvolvida com foco educativo e científico, integra dados geoespaciais com funcionalidades avançadas de filtragem, contextualização geográfica e administração.
+**PaleoMapa** is an interactive web application for visualization, exploration, and management of paleontological data in Portugal. Developed with an educational and scientific focus, it integrates geospatial data with advanced filtering, geographic contextualization, and administration features.
 
-🔗 **[Ver Online](https://gis4cloud.com/grupo2_ptas2025)**
+🔗 **[Visit Online](https://gis4cloud.com/grupo2_ptas2025)**
 
-## 🌍 Funcionalidades Principais
+## Main Features
 
-- **Mapa Interativo** com visualização de fósseis, sítios arqueológicos e pontos de interesse.
-- **Filtragem Avançada** por idade geológica, tipo de fóssil (espécie, família, ordem, genése, etc) e raio de distância.
-- **Painel Administrativo** para inserção, edição e remoção de registos paleontológicos e pedidos de contacto.
-- **Contextualização Geográfica** com museus, parques, cafés e zonas de descanso.
-- **Importação Automatizada** de dados paleontológicos (Excel).
-- **Exportação Automatizada** de dados paleontológicos (SQL, Excel, CSV).
-- **Cálculo de Isócronas** (tempo de deslocação a pé, de bicicleta ou de carro - 5, 10, 15 minutos).
-- **Camadas Personalizadas** com alternância dinâmica.
+- **Interactive Map** with visualization of fossils, archaeological sites, and points of interest.
+- **Advanced Filtering** by geological age, fossil type (species, family, order, genus, etc.), and distance radius.
+- **Admin Panel** for inserting, editing, and removing paleontological records and contact requests.
+- **Geographic Contextualization** with museums, parks, cafés, and rest areas.
+- **Automated Import** of paleontological data (Excel).
+- **Automated Export** of paleontological data (SQL, Excel, CSV).
+- **Isochrone Calculation** (travel time by foot, bicycle, or car - 5, 10, 15 minutes).
+- **Custom Layers** with dynamic toggling.
 
-## 🧱 Tecnologias Utilizadas
+## Screenshots
 
-- **Frontend:**
-  - [OpenLayers](https://openlayers.org/)
-  - [Turf.js](https://turfjs.org/)
-  - HTML, CSS, JavaScript
+![Fossils Map](docs/paleomapa.png)
+![Road Map](docs/roteiro.png)
 
-- **Backend:**
-  - PHP (API)
-  - PostgreSQL + PostGIS
-  - PgRouting
+## Tech Stack
 
-- **Outros:**
-  - QGIS (pré-processamento de dados)
-  - Deck.gl (visualização de grandes volumes de dados)
+**Frontend:**
+- [OpenLayers](https://openlayers.org/)
+- [Turf.js](https://turfjs.org/)
+- HTML, CSS, JavaScript
 
-## 🗂️ Estrutura do Projeto
+**Backend:**
+- PHP (API)
+- PostgreSQL (PostGIS and PgRouting extensions)
 
-- 📁 `/admin` – Painel administrativo da aplicação  
-- 📁 `/components` – Componentes reutilizáveis  
-- 📁 `/css` – Ficheiros de estilos  
-- 📁 `/db` – Conexão e lógica da base de dados  
-- 📁 `/img` – Imagens usadas na interface  
-- 📁 `/js` – Scripts JavaScript da aplicação  
-- 📁 `/login` – Página e lógica de autenticação  
-- 📁 `/pages` – Páginas da aplicação (mapa, detalhes, etc.)  
-- 📁 `/scripts` – Scripts PHP (ex: importação, cálculos, chamadas de camadas, etc)  
-- 📁 `/services` – Serviços de lógica backend/API  
-- 📁 `/vendor` – Dependências PHP geridas pelo Composer  
-- 📄 `index.php` – Ponto de entrada da aplicação  
-- 📄 `composer.json` – Definições das dependências PHP  
-- 📄 `README.md` – Este ficheiro :)
+**Other:**
+- QGIS (geodata pre-processing)
+- Deck.gl (data visualization)
 
-## 🛠️ Instalação e Execução
+## Architecture
 
-### 1. Clonar o repositório
+### Use Case Diagram
+<img src="docs/usecase.png" alt="Use Case Diagram" width="500"/>
+
+### Concept Diagram
+![Concept Diagram](docs/consept.png)
+### Database Diagram
+![Database Diagram](docs/db_diagram.png)
+
+## Prototypes
+
+View the low-fidelity Figma prototype here: [Low-Fidelity Prototype](https://www.figma.com/design/07ZMQFUNTqLqmPhkWidxx0/Baixa_Fidelidade)
+
+View the high-fidelity Figma prototype here: [High-Fidelity Prototype](https://www.figma.com/design/N4YeTplYTB1gXgQuZc8KSd/Paleomapa)
+
+## Installation
+
+1. Clone repository
 ```bash
-git clone https://github.com/seu-username/paleomapa.git
+git clone https://github.com/ratmir-mukazhanov/paleomapa
 cd paleomapa
 ```
-### 2. Criar a base de dados PostgreSQL com extensão
+2. Create PostgreSQL database and enable PostGIS and PgRouting extensions
 ```bash 
 PostGIS e PgRouting
-psql -U teu_utilizador -c "CREATE DATABASE paleomapa;"
-psql -U teu_utilizador -d paleomapa -c "CREATE EXTENSION postgis;"
+psql -U your_user -c "CREATE DATABASE paleomapa;"
+psql -U your_user -d paleomapa -c "CREATE EXTENSION postgis;"
 ```
-### 3. Importar os dados iniciais
+> Make sure to replace `your_user` with your actual PostgreSQL username and you have PostgreSQL installed and running.
+3. Import data into PostgreSQL
 ```bash
 psql -U teu_utilizador -d paleomapa -f data/import.sql
 ```
-### 4. Colocar os ficheiros na pasta pública do servidor local (por ex. htdocs ou www)
-```bash
-(Este passo é manual – move a pasta ou usa comandos cp/mv conforme o teu ambiente)
-```
-### 5. Iniciar o servidor (Apache + PostgreSQL) com XAMPP, Laragon, etc.
-```bash
-# Aceder via navegador a:
-# http://localhost/paleomapa/index.html
-```
-## 👥 Equipa
+4. Move the project files to your web server directory
+5. Iniciar o servidor (Apache + PostgreSQL) com XAMPP, Laragon, etc.
 
-- **Gustavo Gião** — Dev Full Stack
-- **Ratmir Mukazhanov** — Dev Full Stack
-- **Filipe Rocha** — Dev Full Stack 
-- **Diogo Simão** — Dev Full Stack
+## Credits
 
-## 📄 Licença
+Our team is composed of dedicated students from the [University of Aveiro](https://www.ua.pt/):
+- [Gustavo Gião](https://github.com/gustavogiao) — Team Lead
+- [Ratmir Mukazhanov](https://github.com/ratmir-mukazhanov)
+- [Filipe Rocha](https://github.com/FilipeFRocha)
+- [Diogo Simão](https://github.com/dsimao7)
 
-Este projeto está licenciado sob a **Licença MIT**.
+We would like to thank our professors [Luís Jorge Gonçalves](https://www.linkedin.com/in/lu%C3%ADs-jorge-gon%C3%A7alves-a5752414/) (Escola Superior de Tecnologia e Gestão de Águeda) and [Rute Lourenço Coimbra](https://www.ua.pt/pt/p/80482835) (Departamento de Geociências da Universidade de Aveiro) for their guidance and collaboration throughout this project.
 
-Podes usar, modificar e distribuir livremente este software, desde que mantenhas o aviso de copyright original.
+## Data Source
 
-Consulta o ficheiro [`LICENSE`](LICENSE) para mais informações.
+The paleontological database used in this project was obtained from:
+- [The Paleobiology Database](https://paleobiodb.org/)
+- Sample data provided by the [Departamento de Geociências da Universidade de Aveiro](https://www.ua.pt/pt/geo/galeria)
+
+All data rights belong to their respective owners.
+
+## License
+
+This project is licensed under the MIT License.
+
+Consult the [`LICENSE`](licence.txt) file for more details.
